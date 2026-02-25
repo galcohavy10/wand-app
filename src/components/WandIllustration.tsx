@@ -1,8 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
-export default function WandIllustration() {
+export default function WandIllustration({ isCasting = true }: { isCasting?: boolean }) {
   return (
     <motion.div
       className="relative w-full max-w-[500px]"
@@ -88,57 +88,73 @@ export default function WandIllustration() {
         </defs>
 
         {/* === MAGIC BEAM SHOOTING RIGHT === */}
-        {/* Core beam */}
-        <path d="M350 180 Q420 178 500 180" stroke="url(#beamGradient)" strokeWidth="6" strokeLinecap="round" filter="url(#beamGlow)" className="animate-pulse" />
-        <path d="M350 180 Q420 175 500 170" stroke="url(#beamGradient)" strokeWidth="3" strokeLinecap="round" opacity="0.6" filter="url(#beamGlow)" />
-        <path d="M350 180 Q420 185 500 190" stroke="url(#beamGradient)" strokeWidth="3" strokeLinecap="round" opacity="0.6" filter="url(#beamGlow)" />
+        <AnimatePresence>
+          {isCasting && (
+            <motion.g
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              {/* Core beam */}
+              <path d="M350 180 Q420 178 500 180" stroke="url(#beamGradient)" strokeWidth="6" strokeLinecap="round" filter="url(#beamGlow)" className="animate-pulse" />
+              <path d="M350 180 Q420 175 500 170" stroke="url(#beamGradient)" strokeWidth="3" strokeLinecap="round" opacity="0.6" filter="url(#beamGlow)" />
+              <path d="M350 180 Q420 185 500 190" stroke="url(#beamGradient)" strokeWidth="3" strokeLinecap="round" opacity="0.6" filter="url(#beamGlow)" />
 
-        {/* Particles along the beam */}
-        {[
-          { cx: 382, cy: 172, r: 1.5, dur: 0.8, begin: 0.3, cxStart: 364 },
-          { cx: 421, cy: 181, r: 1.3, dur: 1.2, begin: 0.9, cxStart: 371 },
-          { cx: 395, cy: 176, r: 2.1, dur: 1.6, begin: 0.1, cxStart: 368 },
-          { cx: 448, cy: 169, r: 1.8, dur: 0.9, begin: 1.5, cxStart: 375 },
-          { cx: 467, cy: 185, r: 1.2, dur: 1.4, begin: 0.6, cxStart: 362 },
-          { cx: 410, cy: 190, r: 2.5, dur: 1.1, begin: 1.8, cxStart: 369 },
-          { cx: 436, cy: 173, r: 1.7, dur: 0.7, begin: 0.4, cxStart: 377 },
-          { cx: 475, cy: 188, r: 1.4, dur: 1.9, begin: 1.2, cxStart: 366 },
-          { cx: 390, cy: 180, r: 2.0, dur: 1.3, begin: 0.7, cxStart: 373 },
-          { cx: 455, cy: 170, r: 1.6, dur: 0.6, begin: 1.0, cxStart: 365 },
-          { cx: 485, cy: 183, r: 1.9, dur: 1.7, begin: 0.2, cxStart: 370 },
-          { cx: 402, cy: 178, r: 2.3, dur: 1.0, begin: 1.6, cxStart: 374 },
-          { cx: 430, cy: 192, r: 1.1, dur: 1.5, begin: 0.5, cxStart: 367 },
-          { cx: 460, cy: 167, r: 2.7, dur: 0.8, begin: 1.3, cxStart: 376 },
-          { cx: 493, cy: 186, r: 1.3, dur: 1.8, begin: 0.8, cxStart: 363 },
-        ].map((p, i) => (
-          <circle key={i} cx={p.cx} cy={p.cy} r={p.r} fill="#f0d878" opacity="0">
-            <animate attributeName="opacity" values="0;1;0" dur={`${p.dur}s`} repeatCount="indefinite" begin={`${p.begin}s`} />
-            <animate attributeName="cx" values={`${p.cxStart};500`} dur={`${p.dur}s`} repeatCount="indefinite" begin={`${p.begin}s`} />
-          </circle>
-        ))}
+              {/* Particles along the beam */}
+              {[
+                { cx: 382, cy: 172, r: 1.5, dur: 0.8, begin: 0.3, cxStart: 364 },
+                { cx: 421, cy: 181, r: 1.3, dur: 1.2, begin: 0.9, cxStart: 371 },
+                { cx: 395, cy: 176, r: 2.1, dur: 1.6, begin: 0.1, cxStart: 368 },
+                { cx: 448, cy: 169, r: 1.8, dur: 0.9, begin: 1.5, cxStart: 375 },
+                { cx: 467, cy: 185, r: 1.2, dur: 1.4, begin: 0.6, cxStart: 362 },
+                { cx: 410, cy: 190, r: 2.5, dur: 1.1, begin: 1.8, cxStart: 369 },
+                { cx: 436, cy: 173, r: 1.7, dur: 0.7, begin: 0.4, cxStart: 377 },
+                { cx: 475, cy: 188, r: 1.4, dur: 1.9, begin: 1.2, cxStart: 366 },
+                { cx: 390, cy: 180, r: 2.0, dur: 1.3, begin: 0.7, cxStart: 373 },
+                { cx: 455, cy: 170, r: 1.6, dur: 0.6, begin: 1.0, cxStart: 365 },
+                { cx: 485, cy: 183, r: 1.9, dur: 1.7, begin: 0.2, cxStart: 370 },
+                { cx: 402, cy: 178, r: 2.3, dur: 1.0, begin: 1.6, cxStart: 374 },
+                { cx: 430, cy: 192, r: 1.1, dur: 1.5, begin: 0.5, cxStart: 367 },
+                { cx: 460, cy: 167, r: 2.7, dur: 0.8, begin: 1.3, cxStart: 376 },
+                { cx: 493, cy: 186, r: 1.3, dur: 1.8, begin: 0.8, cxStart: 363 },
+              ].map((p, i) => (
+                <circle key={i} cx={p.cx} cy={p.cy} r={p.r} fill="#f0d878" opacity="0">
+                  <animate attributeName="opacity" values="0;1;0" dur={`${p.dur}s`} repeatCount="indefinite" begin={`${p.begin}s`} />
+                  <animate attributeName="cx" values={`${p.cxStart};500`} dur={`${p.dur}s`} repeatCount="indefinite" begin={`${p.begin}s`} />
+                </circle>
+              ))}
 
-        {/* Stars/Sparkles emanating from tip */}
-        <g stroke="#ffffff" strokeWidth="1" filter="url(#softGlow)">
-          <path d="M350 170 L350 155 M342 162 L358 162" className="animate-pulse" />
-          <path d="M360 190 L360 180 M355 185 L365 185" className="animate-pulse" style={{ animationDelay: "0.4s" }} />
-          <path d="M380 165 L380 150 M372 157 L388 157" className="animate-pulse" stroke="#f0d878" style={{ animationDelay: "0.8s" }} />
-        </g>
+              {/* Stars/Sparkles emanating from tip */}
+              <g stroke="#ffffff" strokeWidth="1" filter="url(#softGlow)">
+                <path d="M350 170 L350 155 M342 162 L358 162" className="animate-pulse" />
+                <path d="M360 190 L360 180 M355 185 L365 185" className="animate-pulse" style={{ animationDelay: "0.4s" }} />
+                <path d="M380 165 L380 150 M372 157 L388 157" className="animate-pulse" stroke="#f0d878" style={{ animationDelay: "0.8s" }} />
+              </g>
 
-        {/* === ORB GLOW at wand tip === */}
-        {/* Outer glow ring */}
-        <circle cx="355" cy="180" r="45" fill="url(#orbGlowOuter)" filter="url(#bigGlow)">
-          <animate attributeName="r" values="40;50;40" dur="2s" repeatCount="indefinite" />
-          <animate attributeName="opacity" values="0.6;0.9;0.6" dur="2s" repeatCount="indefinite" />
-        </circle>
-        {/* Inner orb */}
-        <circle cx="355" cy="180" r="18" fill="url(#orbGlow)" filter="url(#softGlow)">
-          <animate attributeName="r" values="16;20;16" dur="2s" repeatCount="indefinite" />
-        </circle>
-        {/* Bright core */}
-        <circle cx="355" cy="180" r="6" fill="#ffffff" opacity="0.9">
-          <animate attributeName="r" values="5;8;5" dur="1s" repeatCount="indefinite" />
-          <animate attributeName="opacity" values="0.8;1;0.8" dur="1s" repeatCount="indefinite" />
-        </circle>
+              {/* === ORB GLOW at wand tip === */}
+              {/* Outer glow ring */}
+              <circle cx="355" cy="180" r="45" fill="url(#orbGlowOuter)" filter="url(#bigGlow)">
+                <animate attributeName="r" values="40;50;40" dur="2s" repeatCount="indefinite" />
+                <animate attributeName="opacity" values="0.6;0.9;0.6" dur="2s" repeatCount="indefinite" />
+              </circle>
+              {/* Inner orb */}
+              <circle cx="355" cy="180" r="18" fill="url(#orbGlow)" filter="url(#softGlow)">
+                <animate attributeName="r" values="16;20;16" dur="2s" repeatCount="indefinite" />
+              </circle>
+              {/* Bright core */}
+              <circle cx="355" cy="180" r="6" fill="#ffffff" opacity="0.9">
+                <animate attributeName="r" values="5;8;5" dur="1s" repeatCount="indefinite" />
+                <animate attributeName="opacity" values="0.8;1;0.8" dur="1s" repeatCount="indefinite" />
+              </circle>
+            </motion.g>
+          )}
+        </AnimatePresence>
+
+        {/* Small dim orb when NOT casting */}
+        {!isCasting && (
+          <circle cx="355" cy="180" r="8" fill="url(#orbGlow)" opacity="0.3" />
+        )}
 
         {/* === WAND === */}
         {/* Wand shaft - pointing right */}

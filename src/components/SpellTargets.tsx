@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 interface SpellTargetProps {
     activeSpell: number; // 0=illuminate, 1=tv, 2=water
+    isCasting: boolean;
 }
 
 function LightBulb({ active }: { active: boolean }) {
@@ -120,69 +121,91 @@ function Television({ active }: { active: boolean }) {
     );
 }
 
-function WaterFaucet({ active }: { active: boolean }) {
+function WateredPlant({ active }: { active: boolean }) {
     return (
-        <svg width="120" height="150" viewBox="0 0 120 150" fill="none">
-            {/* Faucet body */}
-            <rect x="40" y="20" width="40" height="12" rx="6" fill="#888" stroke="#999" strokeWidth="1" />
-            {/* Spout */}
-            <path d="M75 26 Q95 26 95 40 L95 55 Q95 60 90 60 L85 60 Q82 60 82 55 L82 42 Q82 36 75 36" fill="#777" stroke="#999" strokeWidth="1" />
-            {/* Handle */}
-            <rect x="50" y="10" width="20" height="14" rx="4" fill="#666" stroke="#888" strokeWidth="1" />
-            <circle cx="60" cy="17" r="3" fill="#555" />
-            {/* Water drops / stream */}
+        <svg width="120" height="160" viewBox="0 0 120 160" fill="none">
+            {/* Pot */}
+            <path d="M35 120 L40 150 L80 150 L85 120 Z" fill="#8B4513" stroke="#6B3410" strokeWidth="1.5" />
+            <rect x="30" y="115" width="60" height="8" rx="3" fill="#A0522D" stroke="#6B3410" strokeWidth="1" />
+            {/* Soil */}
+            <ellipse cx="60" cy="120" rx="25" ry="4" fill="#3D2B1F" />
+
+            {/* Stem */}
+            <path d="M60 120 Q58 100 60 80" stroke="#228B22" strokeWidth="3" fill="none" />
+
+            {/* Leaves - base state */}
+            <path d="M60 105 Q45 95 50 85 Q55 90 60 105" fill="#2E8B2E" />
+            <path d="M60 100 Q75 90 70 78 Q65 85 60 100" fill="#32CD32" />
+            <path d="M60 90 Q48 82 52 72 Q56 78 60 90" fill="#228B22" />
+
+            {/* Growing leaves + water when active */}
             {active && (
                 <g>
-                    {/* Main stream */}
+                    {/* New sprouting leaf */}
                     <motion.path
-                        d="M88 60 Q88 100 85 130"
-                        stroke="rgba(100,180,255,0.6)"
-                        strokeWidth="4"
-                        strokeLinecap="round"
-                        fill="none"
-                        initial={{ pathLength: 0, opacity: 0 }}
-                        animate={{ pathLength: 1, opacity: 0.7 }}
-                        transition={{ duration: 0.5 }}
+                        d="M60 85 Q78 75 72 62 Q66 72 60 85"
+                        fill="#44DD44"
+                        initial={{ scale: 0, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ duration: 0.8, delay: 0.3 }}
+                        style={{ transformOrigin: "60px 85px" }}
                     />
-                    {/* Drips */}
+
+                    {/* Water drops falling */}
                     {[0, 1, 2, 3, 4].map((i) => (
                         <motion.ellipse
-                            key={i}
-                            cx={85 + (i - 2) * 3}
-                            cy={130}
-                            rx={3 + i * 2}
-                            ry={1}
-                            fill="rgba(100,180,255,0.3)"
-                            initial={{ opacity: 0, scale: 0 }}
-                            animate={{ opacity: [0, 0.5, 0], scale: [0, 1, 1.5] }}
-                            transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.3 }}
+                            key={`drop-${i}`}
+                            cx={50 + i * 6}
+                            cy={40}
+                            rx={2}
+                            ry={3}
+                            fill="rgba(100,180,255,0.7)"
+                            animate={{
+                                cy: [30 + i * 3, 120],
+                                opacity: [0.8, 0],
+                            }}
+                            transition={{
+                                duration: 1,
+                                repeat: Infinity,
+                                delay: i * 0.25,
+                                ease: "easeIn",
+                            }}
                         />
                     ))}
-                    {/* Splash particles */}
-                    {[...Array(6)].map((_, i) => (
+
+                    {/* Splash on leaves */}
+                    {[0, 1, 2].map((i) => (
                         <motion.circle
                             key={`splash-${i}`}
-                            cx={85}
-                            cy={130}
+                            cx={55 + i * 5}
+                            cy={85}
                             r={1.5}
                             fill="rgba(100,180,255,0.5)"
                             animate={{
-                                cx: 85 + (Math.random() - 0.5) * 30,
-                                cy: 130 - Math.random() * 15,
-                                opacity: [0, 0.8, 0],
+                                cy: [85, 80 - i * 3],
+                                cx: [55 + i * 5, 50 + i * 8],
+                                opacity: [0.7, 0],
+                                scale: [1, 0.3],
                             }}
-                            transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.2 }}
+                            transition={{ duration: 0.6, repeat: Infinity, delay: 0.5 + i * 0.2 }}
                         />
                     ))}
+
+                    {/* Glow around plant */}
+                    <motion.ellipse
+                        cx="60" cy="90" rx="35" ry="40"
+                        fill="rgba(100,200,100,0.06)"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: [0.1, 0.2, 0.1] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                    />
                 </g>
             )}
-            {/* Sink basin hint */}
-            <path d="M60 135 Q60 145 75 145 Q100 145 100 135" stroke="#555" strokeWidth="1.5" fill="none" />
         </svg>
     );
 }
 
-export default function SpellTargets({ activeSpell }: SpellTargetProps) {
+export default function SpellTargets({ activeSpell, isCasting }: SpellTargetProps) {
     return (
         <div style={{ position: "relative", width: 140, height: 160, display: "flex", alignItems: "center", justifyContent: "center" }}>
             <AnimatePresence mode="wait">
@@ -194,7 +217,7 @@ export default function SpellTargets({ activeSpell }: SpellTargetProps) {
                         exit={{ opacity: 0, scale: 0.8 }}
                         transition={{ duration: 0.5 }}
                     >
-                        <LightBulb active={true} />
+                        <LightBulb active={isCasting} />
                     </motion.div>
                 )}
                 {activeSpell === 1 && (
@@ -205,7 +228,7 @@ export default function SpellTargets({ activeSpell }: SpellTargetProps) {
                         exit={{ opacity: 0, scale: 0.8 }}
                         transition={{ duration: 0.5 }}
                     >
-                        <Television active={true} />
+                        <Television active={isCasting} />
                     </motion.div>
                 )}
                 {activeSpell === 2 && (
@@ -216,7 +239,7 @@ export default function SpellTargets({ activeSpell }: SpellTargetProps) {
                         exit={{ opacity: 0, scale: 0.8 }}
                         transition={{ duration: 0.5 }}
                     >
-                        <WaterFaucet active={true} />
+                        <WateredPlant active={isCasting} />
                     </motion.div>
                 )}
             </AnimatePresence>
