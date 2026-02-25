@@ -137,24 +137,24 @@ export default function Home() {
         </section>
 
         {/* ===== SPECS BAR ===== */}
-        <section className="py-12 border-y border-[var(--gold)]/[0.08]">
+        <section className="py-16 md:py-20 border-y border-[var(--gold)]/[0.08]">
           <MagicReveal>
-            <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center px-6">
+            <div className="w-full max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-8 text-center px-6">
               {[
                 { label: "Material", value: "PLA+ Resin" },
                 { label: "Length", value: '12"' },
                 { label: "Finish", value: "Hand-Painted" },
                 { label: "Core", value: "Weighted" },
               ].map((spec) => (
-                <div key={spec.label}>
+                <div key={spec.label} className="flex flex-col items-center gap-2">
                   <p
-                    className="text-lg md:text-xl text-[var(--gold-light)]"
+                    className="text-xl md:text-2xl text-[var(--gold-light)] font-medium"
                     style={{ fontFamily: "var(--font-cinzel)" }}
                   >
                     {spec.value}
                   </p>
                   <p
-                    className="text-[var(--foreground)]/30 text-xs uppercase tracking-widest mt-1"
+                    className="text-[var(--foreground)]/40 text-xs md:text-sm uppercase tracking-[0.2em]"
                     style={{ fontFamily: "var(--font-cinzel)" }}
                   >
                     {spec.label}
@@ -166,8 +166,8 @@ export default function Home() {
         </section>
 
         {/* ===== FEATURES ===== */}
-        <section className="py-24 px-6">
-          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+        <section className="py-24 md:py-32 px-6">
+          <div className="w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
             {[
               {
                 icon: "✦",
@@ -192,20 +192,20 @@ export default function Home() {
             ].map((feat, i) => (
               <MagicReveal key={feat.title} delay={i * 0.08}>
                 <motion.div
-                  className="text-center p-8 rounded-2xl border border-[var(--gold)]/[0.06] bg-[rgba(45,27,78,0.08)] hover:border-[var(--gold)]/15 transition-all duration-500"
-                  whileHover={{ y: -3, transition: { duration: 0.25 } }}
+                  className="flex flex-col items-center text-center p-10 md:p-12 rounded-3xl border border-[var(--gold)]/10 bg-[rgba(45,27,78,0.15)] hover:border-[var(--gold)]/30 transition-all duration-500 hover:bg-[rgba(45,27,78,0.25)] shadow-[0_4px_30px_rgba(0,0,0,0.1)]"
+                  whileHover={{ y: -5, transition: { duration: 0.3 } }}
                 >
-                  <span className="text-2xl text-[var(--gold)] block mb-3">
+                  <span className="text-4xl text-[var(--gold)] block mb-6 drop-shadow-[0_0_10px_rgba(201,168,76,0.5)]">
                     {feat.icon}
                   </span>
                   <h3
-                    className="text-base text-[var(--gold-light)] mb-2"
+                    className="text-xl md:text-2xl text-[var(--gold-light)] mb-4 font-semibold tracking-wide"
                     style={{ fontFamily: "var(--font-cinzel)" }}
                   >
                     {feat.title}
                   </h3>
                   <p
-                    className="text-[var(--foreground)]/40 text-sm"
+                    className="text-[var(--foreground)]/60 text-base md:text-lg leading-relaxed font-light"
                     style={{ fontFamily: "var(--font-crimson)" }}
                   >
                     {feat.desc}
@@ -216,13 +216,13 @@ export default function Home() {
           </div>
         </section>
 
-        <div className="magic-divider max-w-sm mx-auto" />
+        <div className="magic-divider w-full max-w-2xl mx-auto opacity-50" />
 
         {/* ===== THE STORY (short) ===== */}
-        <section className="py-24 px-6 text-center">
+        <section className="py-24 md:py-32 px-6 flex flex-col items-center text-center">
           <MagicReveal>
             <p
-              className="text-[var(--purple-light)] tracking-[0.3em] uppercase text-[10px] mb-4"
+              className="text-[var(--purple-light)] tracking-[0.4em] uppercase text-sm font-bold mb-6 drop-shadow-[0_0_8px_rgba(179,136,255,0.4)]"
               style={{ fontFamily: "var(--font-cinzel)" }}
             >
               The Origin
@@ -230,15 +230,15 @@ export default function Home() {
           </MagicReveal>
           <MagicReveal delay={0.1}>
             <h2
-              className="text-3xl md:text-4xl mb-6"
-              style={{ fontFamily: "var(--font-cinzel)", color: "var(--gold)" }}
+              className="text-4xl md:text-5xl lg:text-6xl mb-12 font-bold w-full max-w-4xl leading-tight text-[var(--gold-light)]"
+              style={{ fontFamily: "var(--font-cinzel)" }}
             >
               From Keyboard to Workshop
             </h2>
           </MagicReveal>
           <MagicReveal delay={0.2}>
             <div
-              className="max-w-xl mx-auto text-[var(--foreground)]/50 text-base md:text-lg leading-relaxed space-y-4"
+              className="w-full max-w-3xl mx-auto flex flex-col gap-8 text-[var(--foreground)]/80 text-xl md:text-2xl leading-loose font-light"
               style={{ fontFamily: "var(--font-crimson)" }}
             >
               <p>
@@ -253,22 +253,22 @@ export default function Home() {
             </div>
           </MagicReveal>
           <MagicReveal delay={0.3}>
-            <div className="mt-8 flex items-center justify-center gap-3">
-              <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-[var(--gold)]/20" />
-              <span className="text-[var(--gold)]/20 text-sm">✦</span>
-              <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[var(--gold)]/20" />
+            <div className="mt-16 flex items-center justify-center gap-6">
+              <div className="h-[1px] w-24 bg-gradient-to-r from-transparent to-[var(--gold)]/40" />
+              <span className="text-[var(--gold)]/40 text-xl">✦</span>
+              <div className="h-[1px] w-24 bg-gradient-to-l from-transparent to-[var(--gold)]/40" />
             </div>
           </MagicReveal>
         </section>
 
-        <div className="magic-divider max-w-sm mx-auto" />
+        <div className="magic-divider w-full max-w-2xl mx-auto opacity-50" />
 
         {/* ===== QUOTE ===== */}
-        <section className="py-24 px-6 text-center">
+        <section className="py-32 px-6 flex flex-col items-center text-center">
           <MagicReveal>
             <blockquote
-              className="text-2xl md:text-3xl max-w-2xl mx-auto leading-snug"
-              style={{ fontFamily: "var(--font-cinzel)", color: "var(--gold)" }}
+              className="text-3xl md:text-4xl lg:text-5xl font-bold w-full max-w-5xl mx-auto leading-[1.3] text-transparent bg-clip-text bg-gradient-to-r from-[var(--gold)] via-[var(--gold-light)] to-[var(--gold)]"
+              style={{ fontFamily: "var(--font-cinzel)" }}
             >
               &ldquo;The line between technology and magic has never been
               thinner.&rdquo;
@@ -277,42 +277,43 @@ export default function Home() {
         </section>
 
         {/* ===== BOTTOM CTA ===== */}
-        <section className="py-24 px-6 text-center">
+        <section className="py-24 md:py-32 px-6 flex flex-col items-center text-center bg-[radial-gradient(ellipse_at_top,_rgba(123,75,179,0.15)_0%,_transparent_70%)] relative">
           <MagicReveal>
             <h2
-              className="text-shimmer text-3xl md:text-5xl mb-3"
+              className="text-shimmer text-5xl md:text-6xl lg:text-7xl font-bold mb-8"
               style={{ fontFamily: "var(--font-cinzel)" }}
             >
               Claim Your Wand
             </h2>
             <p
-              className="text-[var(--foreground)]/40 text-base mb-2"
+              className="text-[var(--foreground)]/70 text-xl md:text-2xl mb-12 max-w-2xl mx-auto font-light leading-relaxed"
               style={{ fontFamily: "var(--font-crimson)" }}
             >
               First batch. Limited run. Each one unique.
             </p>
             <p
-              className="text-3xl md:text-4xl font-bold text-[var(--gold-light)] mb-6"
+              className="text-5xl md:text-6xl font-bold text-[var(--gold-light)] mb-10 drop-shadow-[0_0_15px_rgba(201,168,76,0.3)]"
               style={{ fontFamily: "var(--font-cinzel)" }}
             >
               $39
             </p>
             <motion.button
-              className="relative px-14 py-5 text-base uppercase tracking-[0.25em] rounded-full overflow-hidden cursor-pointer"
+              className="relative px-16 py-6 text-lg md:text-xl uppercase tracking-[0.25em] rounded-full overflow-hidden cursor-pointer shadow-[0_0_40px_rgba(201,168,76,0.2)] hover:shadow-[0_0_60px_rgba(201,168,76,0.3)] transition-shadow duration-300 group"
               style={{ fontFamily: "var(--font-cinzel)" }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-[var(--gold)] via-[var(--gold-light)] to-[var(--gold)] opacity-90" />
-              <span className="relative z-10 text-[#0a0515] font-semibold">
+              <div className="absolute inset-0 bg-gradient-to-r from-[var(--gold)] via-[#fff] to-[var(--gold)] opacity-0 group-hover:opacity-40 transition-opacity duration-500" />
+              <span className="relative z-10 text-[#0a0515] font-bold">
                 Pre-Order Now
               </span>
             </motion.button>
             <p
-              className="text-[var(--foreground)]/25 text-xs mt-4"
-              style={{ fontFamily: "var(--font-crimson)" }}
+              className="text-[var(--foreground)]/50 text-sm md:text-base mt-8 tracking-wide uppercase"
+              style={{ fontFamily: "var(--font-cinzel)" }}
             >
-              Free shipping — Ships in 2-3 weeks
+              <span className="text-[var(--gold)] font-bold">Free shipping</span> — Ships in 2-3 weeks
             </p>
           </MagicReveal>
         </section>
