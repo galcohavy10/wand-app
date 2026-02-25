@@ -8,30 +8,28 @@ import SpellTargets from "./SpellTargets";
 const SPELLS = [
     { word: "Illuminate!", color: "#FFD700" },
     { word: "TV-onus!", color: "#4488ff" },
-    { word: "Aguavate!", color: "#66bbff" },
+    { word: "Aguavate!", color: "#66ddff" },
+    { word: "Hocus Unfocus!", color: "#ff6644" },
+    { word: "Breezio!", color: "#88ddaa" },
 ];
 
-const SHOW_OFF_DURATION = 1000;   // show object in OFF state first
-const CAST_DURATION = 3000;       // wand fires, object ON
-const PAUSE_DURATION = 600;       // pause before next scene
+const SHOW_OFF_DURATION = 600;
+const CAST_DURATION = 2500;
+const PAUSE_DURATION = 300;
 
 export default function SpellCaster() {
     const [activeSpell, setActiveSpell] = useState(0);
     const [isCasting, setIsCasting] = useState(false);
 
     const runCycle = useCallback(() => {
-        // Phase 1: Object visible but OFF, wand dim
         setIsCasting(false);
 
-        // Phase 2: After a beat, fire the wand and activate the object
         const castTimer = setTimeout(() => {
             setIsCasting(true);
 
-            // Phase 3: After cast duration, stop and move to next
             const stopTimer = setTimeout(() => {
                 setIsCasting(false);
 
-                // Phase 4: Brief pause, then next spell
                 const nextTimer = setTimeout(() => {
                     setActiveSpell((prev) => (prev + 1) % SPELLS.length);
                 }, PAUSE_DURATION);
@@ -66,10 +64,10 @@ export default function SpellCaster() {
             <div style={{ flex: "0 0 auto", width: "clamp(280px, 50vw, 420px)", position: "relative" }}>
                 <WandIllustration isCasting={isCasting} />
 
-                {/* Spell text — near the boy's head */}
+                {/* Spell text — dramatic entrance near the boy */}
                 <div style={{
                     position: "absolute",
-                    top: "15%",
+                    top: "12%",
                     left: "55%",
                     transform: "translateX(-50%)",
                     pointerEvents: "none",
@@ -77,30 +75,54 @@ export default function SpellCaster() {
                 }}>
                     <AnimatePresence mode="wait">
                         {isCasting && (
-                            <motion.p
+                            <motion.div
                                 key={spell.word}
-                                initial={{ opacity: 0, y: 8, scale: 0.7 }}
-                                animate={{ opacity: 1, y: 0, scale: 1 }}
-                                exit={{ opacity: 0, y: -8, scale: 0.7 }}
-                                transition={{ duration: 0.35 }}
-                                style={{
+                                initial={{ opacity: 0, scale: 0.3, y: 15, filter: "blur(8px)" }}
+                                animate={{
+                                    opacity: 1,
+                                    scale: [0.3, 1.15, 1],
+                                    y: [15, -3, 0],
+                                    filter: "blur(0px)",
+                                }}
+                                exit={{ opacity: 0, scale: 0.6, y: -10, filter: "blur(4px)" }}
+                                transition={{
+                                    duration: 0.5,
+                                    scale: { duration: 0.6, times: [0, 0.6, 1] },
+                                    y: { duration: 0.6, times: [0, 0.6, 1] },
+                                }}
+                                style={{ position: "relative" }}
+                            >
+                                {/* Glow backdrop */}
+                                <motion.div
+                                    style={{
+                                        position: "absolute",
+                                        inset: -12,
+                                        borderRadius: 20,
+                                        background: `radial-gradient(ellipse, ${spell.color}25 0%, transparent 70%)`,
+                                        zIndex: -1,
+                                    }}
+                                    animate={{ opacity: [0.5, 1, 0.5], scale: [0.95, 1.1, 0.95] }}
+                                    transition={{ duration: 1.5, repeat: Infinity }}
+                                />
+                                <p style={{
                                     fontFamily: "var(--font-cinzel)",
-                                    fontSize: "clamp(0.8rem, 1.8vw, 1.2rem)",
-                                    fontWeight: 700,
+                                    fontSize: "clamp(0.85rem, 2vw, 1.3rem)",
+                                    fontWeight: 800,
                                     color: spell.color,
                                     fontStyle: "italic",
-                                    textShadow: `0 0 16px ${spell.color}80, 0 0 32px ${spell.color}40`,
+                                    textShadow: `0 0 10px ${spell.color}, 0 0 25px ${spell.color}90, 0 0 50px ${spell.color}50`,
                                     whiteSpace: "nowrap",
-                                }}
-                            >
-                                &ldquo;{spell.word}&rdquo;
-                            </motion.p>
+                                    letterSpacing: "0.05em",
+                                }}>
+                                    &ldquo;{spell.word}&rdquo;
+                                </p>
+                            </motion.div>
                         )}
                     </AnimatePresence>
                 </div>
             </div>
 
-            {/* Spell target — to the right */}
+            {/* Spell target */}
             <div style={{
                 flex: "0 0 auto",
                 display: "flex",
