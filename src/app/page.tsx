@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import MagicReveal from "@/components/MagicReveal";
-import WandIllustration from "@/components/WandIllustration";
+import SpellCaster from "@/components/SpellCaster";
 
 const CHECKOUT_URL = "https://buy.stripe.com/bJeaEWfQx45j34B21zbjW03";
 
@@ -60,10 +60,8 @@ export default function Home() {
             gap: 48,
             paddingTop: 80,
           }}>
-            {/* Wand Illustration */}
-            <div style={{ width: "100%", maxWidth: 500 }}>
-              <WandIllustration />
-            </div>
+            {/* Spell Caster — boy + animated targets */}
+            <SpellCaster />
 
             {/* Hero Text */}
             <motion.div
