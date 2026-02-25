@@ -13,26 +13,33 @@ const SPELLS = [
     { word: "Breezio!", color: "#88ddaa" },
 ];
 
-const SHOW_OFF_DURATION = 800;
-const CAST_DURATION = 3000;
-const PAUSE_DURATION = 300;
+const SHOW_OFF_DURATION = 900;
+const CAST_DURATION = 3200;
+const SPELL_HIT_DELAY = 150; // pause before spell takes effect
 
 export default function SpellCaster() {
     const [activeSpell, setActiveSpell] = useState(0);
     const [isCasting, setIsCasting] = useState(false);
+    const [isObjectActive, setIsObjectActive] = useState(false);
 
     const runCycle = useCallback(() => {
         setIsCasting(false);
+        setIsObjectActive(false);
 
         const castTimer = setTimeout(() => {
             setIsCasting(true);
+
+            // Object activates after a short delay
+            const hitTimer = setTimeout(() => {
+                setIsObjectActive(true);
+            }, SPELL_HIT_DELAY);
 
             // After cast, go straight to next spell (object stays ON during exit)
             const nextTimer = setTimeout(() => {
                 setActiveSpell((prev) => (prev + 1) % SPELLS.length);
             }, CAST_DURATION);
 
-            return () => clearTimeout(nextTimer);
+            return () => { clearTimeout(nextTimer); clearTimeout(hitTimer); };
         }, SHOW_OFF_DURATION);
 
         return () => clearTimeout(castTimer);
@@ -125,7 +132,7 @@ export default function SpellCaster() {
                 justifyContent: "center",
                 marginLeft: -40,
             }}>
-                <SpellTargets activeSpell={activeSpell} isCasting={isCasting} />
+                <SpellTargets activeSpell={activeSpell} isCasting={isObjectActive} />
             </div>
         </div>
     );
