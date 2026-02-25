@@ -13,8 +13,8 @@ const SPELLS = [
     { word: "Breezio!", color: "#88ddaa" },
 ];
 
-const SHOW_OFF_DURATION = 600;
-const CAST_DURATION = 2500;
+const SHOW_OFF_DURATION = 800;
+const CAST_DURATION = 3000;
 const PAUSE_DURATION = 300;
 
 export default function SpellCaster() {
@@ -57,7 +57,7 @@ export default function SpellCaster() {
         }}>
             {/* Boy with wand */}
             <div style={{ flex: "0 0 auto", width: "clamp(280px, 50vw, 420px)", position: "relative" }}>
-                <WandIllustration isCasting={isCasting} />
+                <WandIllustration isCasting={isCasting} spellIndex={activeSpell} />
 
                 {/* Spell text — dramatic entrance near the boy */}
                 <div style={{

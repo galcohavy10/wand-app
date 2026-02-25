@@ -123,10 +123,13 @@ function WateredPlant({ active }: { active: boolean }) {
                             transition={{ duration: 0.5, repeat: Infinity, delay: 0.4 + i * 0.15 }} />
                     ))}
 
-                    {/* Growing leaf */}
-                    <motion.path d="M50 78 Q66 68 62 56 Q56 64 50 78" fill="#44DD44"
-                        initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
-                        transition={{ duration: 0.8, delay: 0.4 }} style={{ transformOrigin: "50px 78px" }} />
+                    {/* New tiny leaf sprouting at top */}
+                    <motion.path d="M52 72 Q62 60 57 52 Q54 60 52 72" fill="#55ee55"
+                        initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 0.9 }}
+                        transition={{ duration: 1, delay: 0.5 }} style={{ transformOrigin: "52px 72px" }} />
+                    <motion.path d="M48 76 Q38 66 42 58 Q46 64 48 76" fill="#44cc44"
+                        initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 0.8 }}
+                        transition={{ duration: 1, delay: 0.8 }} style={{ transformOrigin: "48px 76px" }} />
 
                     <motion.ellipse cx="50" cy="85" rx="28" ry="30" fill="rgba(100,200,100,0.04)"
                         initial={{ opacity: 0 }} animate={{ opacity: [0.05, 0.12, 0.05] }}
