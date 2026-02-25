@@ -2,8 +2,22 @@
 
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
+import Script from "next/script";
 import MagicReveal from "@/components/MagicReveal";
 import WandIllustration from "@/components/WandIllustration";
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'stripe-buy-button': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
+        'buy-button-id'?: string;
+        'publishable-key'?: string;
+        'client-reference-id'?: string;
+        'customer-email'?: string;
+      };
+    }
+  }
+}
 
 const CSSParticles = dynamic(() => import("@/components/CSSParticles"), {
   ssr: false,
@@ -44,7 +58,7 @@ export default function Home() {
                 className="text-[var(--purple-light)] tracking-[0.4em] uppercase text-xs md:text-sm mb-4 font-semibold"
                 style={{ fontFamily: "var(--font-cinzel)" }}
               >
-                Forged in code & resin
+                Forged in Resin
               </p>
               <h1
                 className="text-shimmer text-6xl md:text-7xl lg:text-8xl font-bold leading-tight md:leading-[1.1] mb-6"
@@ -56,46 +70,52 @@ export default function Home() {
                 className="text-[var(--foreground)]/70 text-lg md:text-2xl max-w-lg mx-auto md:mx-0 leading-relaxed font-light mt-4"
                 style={{ fontFamily: "var(--font-crimson)" }}
               >
-                A real, hand-crafted wand. 3D printed. Hand-painted. One of a kind.
+                Cast real spells with a real wand.
               </p>
-            </motion.div>
 
-            {/* Price + CTA */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1 }}
-              className="mt-12 flex flex-col md:flex-row items-center md:items-start gap-8 z-20 relative"
-            >
-              <div className="flex flex-col items-center md:items-start gap-4">
-                <motion.button
-                  className="relative px-12 py-5 text-sm md:text-base uppercase tracking-[0.25em] rounded-full overflow-hidden cursor-pointer shadow-[0_0_40px_rgba(201,168,76,0.15)] hover:shadow-[0_0_60px_rgba(201,168,76,0.25)] transition-shadow duration-300"
-                  style={{ fontFamily: "var(--font-cinzel)" }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.97 }}
-                >
-                  {/* Button glow bg */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-[var(--gold)] via-[var(--gold-light)] to-[var(--gold)] opacity-90" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-[var(--gold)] via-[#fff] to-[var(--gold)] opacity-0 hover:opacity-30 transition-opacity duration-500" />
-                  <span className="relative z-10 text-[#0a0515] font-bold text-lg">
-                    Pre-Order Now
-                  </span>
-                </motion.button>
-                <p
-                  className="text-4xl md:text-5xl font-bold text-[var(--gold-light)] ml-2"
-                  style={{ fontFamily: "var(--font-cinzel)" }}
-                >
-                  $39
-                </p>
-              </div>
-
-              <p
-                className="text-[var(--foreground)]/50 text-sm md:text-base max-w-[200px] text-center md:text-left leading-relaxed mt-2"
-                style={{ fontFamily: "var(--font-crimson)" }}
+              {/* Product Info & CTA */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1 }}
+                className="mt-12 flex flex-col gap-6 items-center md:items-start z-20 relative bg-[rgba(45,27,78,0.2)] p-8 rounded-2xl border border-[var(--gold)]/20 shadow-[0_0_30px_rgba(201,168,76,0.05)] w-full max-w-md"
               >
-                <span className="block text-[var(--gold)] mb-1">Free shipping</span>
-                Ships in 2-3 weeks
-              </p>
+                <div className="w-full flex justify-between items-center border-b border-[var(--gold)]/10 pb-4 mb-2">
+                  <span className="text-[var(--foreground)]/60 uppercase tracking-widest text-xs font-semibold" style={{ fontFamily: "var(--font-cinzel)" }}>Initial Batch</span>
+                  <p
+                    className="text-3xl font-bold text-[var(--gold-light)]"
+                    style={{ fontFamily: "var(--font-cinzel)" }}
+                  >
+                    $39
+                  </p>
+                </div>
+
+                <div className="w-full flex justify-center">
+                  <img
+                    src="https://m.media-amazon.com/images/I/615123EN3SL.jpg"
+                    alt="Wand Placeholder"
+                    className="w-full h-32 object-cover rounded-lg drop-shadow-[0_0_15px_rgba(201,168,76,0.4)] hover:scale-105 transition-transform duration-500 my-4 border border-[var(--gold)]/20"
+                  />
+                </div>
+
+                <div className="w-full flex flex-col items-center gap-4">
+                  {/* Next Script to load stripe component properly */}
+                  <Script async src="https://js.stripe.com/v3/buy-button.js" />
+
+                  <stripe-buy-button
+                    buy-button-id="prod_U2iltPmfsIBEaE"
+                    publishable-key="pk_live_XXXXXXXXXXXXXXXXXXXX"
+                  ></stripe-buy-button>
+
+                  <p
+                    className="text-[var(--foreground)]/50 text-xs text-center w-full leading-relaxed mt-2"
+                    style={{ fontFamily: "var(--font-crimson)" }}
+                  >
+                    <span className="text-[var(--gold)]">Free shipping</span> —
+                    Ships in 2-3 weeks
+                  </p>
+                </div>
+              </motion.div>
             </motion.div>
           </div>
 
