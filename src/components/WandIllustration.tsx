@@ -5,56 +5,62 @@ import { motion } from "framer-motion";
 export default function WandIllustration() {
   return (
     <motion.div
-      className="relative animate-float"
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
+      className="relative w-full max-w-[500px]"
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
     >
-      {/* Ambient glow behind the whole scene */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-[var(--gold)] rounded-full blur-[80px] opacity-20" />
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-32 h-32 bg-[var(--purple)] rounded-full blur-[60px] opacity-15" />
+      {/* Ambient glow behind the boy and wand */}
+      <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[var(--gold)] rounded-full blur-[100px] opacity-20" />
+      <div className="absolute top-1/2 left-2/3 -translate-y-1/2 w-48 h-48 bg-[var(--purple)] rounded-full blur-[80px] opacity-30" />
 
       <svg
-        width="340"
-        height="440"
-        viewBox="0 0 340 440"
+        width="100%"
+        height="100%"
+        viewBox="0 0 500 400"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="animate-wand-glow relative z-10"
+        className="w-full h-auto relative z-10"
       >
         <defs>
-          <linearGradient id="wandBody" x1="170" y1="60" x2="170" y2="260" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#A07828" />
-            <stop offset="25%" stopColor="#8B6914" />
-            <stop offset="50%" stopColor="#6B4F10" />
-            <stop offset="80%" stopColor="#4A3508" />
-            <stop offset="100%" stopColor="#3D2B06" />
+          <linearGradient id="wandBody" x1="160" y1="200" x2="350" y2="180" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#3D2B06" />
+            <stop offset="20%" stopColor="#4A3508" />
+            <stop offset="50%" stopColor="#8B6914" />
+            <stop offset="100%" stopColor="#A07828" />
           </linearGradient>
-          <linearGradient id="handleGrad" x1="170" y1="260" x2="170" y2="310" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#4A3508" />
+          <linearGradient id="handleGrad" x1="120" y1="205" x2="160" y2="200" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#2A1D04" />
             <stop offset="50%" stopColor="#3D2B06" />
-            <stop offset="100%" stopColor="#2A1D04" />
+            <stop offset="100%" stopColor="#4A3508" />
           </linearGradient>
           <radialGradient id="orbGlow" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stopColor="#ffffff" stopOpacity="1" />
-            <stop offset="30%" stopColor="#f0d878" stopOpacity="0.9" />
+            <stop offset="20%" stopColor="#f0d878" stopOpacity="0.9" />
             <stop offset="60%" stopColor="#c9a84c" stopOpacity="0.6" />
             <stop offset="100%" stopColor="#7b4bb3" stopOpacity="0" />
           </radialGradient>
           <radialGradient id="orbGlowOuter" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#f0d878" stopOpacity="0.4" />
-            <stop offset="50%" stopColor="#b388ff" stopOpacity="0.15" />
+            <stop offset="0%" stopColor="#f0d878" stopOpacity="0.6" />
+            <stop offset="40%" stopColor="#b388ff" stopOpacity="0.3" />
             <stop offset="100%" stopColor="#7b4bb3" stopOpacity="0" />
           </radialGradient>
           <filter id="softGlow">
-            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feGaussianBlur stdDeviation="4" result="blur" />
             <feMerge>
               <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
           <filter id="bigGlow">
-            <feGaussianBlur stdDeviation="8" result="blur" />
+            <feGaussianBlur stdDeviation="12" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          <filter id="beamGlow">
+            <feGaussianBlur stdDeviation="6" result="blur" />
             <feMerge>
               <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
@@ -64,159 +70,161 @@ export default function WandIllustration() {
             <stop offset="0%" stopColor="#D4A574" />
             <stop offset="100%" stopColor="#C4956A" />
           </linearGradient>
-          <linearGradient id="robeGrad" x1="170" y1="340" x2="170" y2="440" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#1a1035" />
+          <linearGradient id="robeGrad" x1="100" y1="180" x2="100" y2="400" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#251848" />
+            <stop offset="50%" stopColor="#1a1035" />
             <stop offset="100%" stopColor="#0d0820" />
           </linearGradient>
-          <linearGradient id="hoodGrad" x1="170" y1="310" x2="170" y2="370" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stopColor="#251848" />
+          <linearGradient id="hoodGrad" x1="100" y1="120" x2="100" y2="200" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#32225a" />
             <stop offset="100%" stopColor="#1a1035" />
+          </linearGradient>
+          <linearGradient id="beamGradient" x1="360" y1="180" x2="500" y2="180" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#ffffff" stopOpacity="0.9" />
+            <stop offset="30%" stopColor="#f0d878" stopOpacity="0.8" />
+            <stop offset="70%" stopColor="#b388ff" stopOpacity="0.4" />
+            <stop offset="100%" stopColor="#7b4bb3" stopOpacity="0" />
           </linearGradient>
         </defs>
 
+        {/* === MAGIC BEAM SHOOTING RIGHT === */}
+        {/* Core beam */}
+        <path d="M350 180 Q420 178 500 180" stroke="url(#beamGradient)" strokeWidth="6" strokeLinecap="round" filter="url(#beamGlow)" className="animate-pulse" />
+        <path d="M350 180 Q420 175 500 170" stroke="url(#beamGradient)" strokeWidth="3" strokeLinecap="round" opacity="0.6" filter="url(#beamGlow)" />
+        <path d="M350 180 Q420 185 500 190" stroke="url(#beamGradient)" strokeWidth="3" strokeLinecap="round" opacity="0.6" filter="url(#beamGlow)" />
+
+        {/* Particles along the beam */}
+        {[...Array(15)].map((_, i) => (
+          <circle key={i} cx={360 + Math.random() * 140} cy={165 + Math.random() * 30} r={1 + Math.random() * 2} fill="#f0d878" opacity="0">
+            <animate attributeName="opacity" values="0;1;0" dur={`${0.5 + Math.random() * 1.5}s`} repeatCount="indefinite" begin={`${Math.random() * 2}s`} />
+            <animate attributeName="cx" values={`${360 + Math.random() * 20};${500}`} dur={`${0.5 + Math.random() * 1.5}s`} repeatCount="indefinite" begin={`${Math.random() * 2}s`} />
+          </circle>
+        ))}
+
+        {/* Stars/Sparkles emanating from tip */}
+        <g stroke="#ffffff" strokeWidth="1" filter="url(#softGlow)">
+          <path d="M350 170 L350 155 M342 162 L358 162" className="animate-pulse" />
+          <path d="M360 190 L360 180 M355 185 L365 185" className="animate-pulse" style={{ animationDelay: "0.4s" }} />
+          <path d="M380 165 L380 150 M372 157 L388 157" className="animate-pulse" stroke="#f0d878" style={{ animationDelay: "0.8s" }} />
+        </g>
+
         {/* === ORB GLOW at wand tip === */}
         {/* Outer glow ring */}
-        <circle cx="170" cy="52" r="35" fill="url(#orbGlowOuter)" filter="url(#bigGlow)">
-          <animate attributeName="r" values="32;38;32" dur="3s" repeatCount="indefinite" />
-          <animate attributeName="opacity" values="0.6;0.9;0.6" dur="3s" repeatCount="indefinite" />
+        <circle cx="355" cy="180" r="45" fill="url(#orbGlowOuter)" filter="url(#bigGlow)">
+          <animate attributeName="r" values="40;50;40" dur="2s" repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0.6;0.9;0.6" dur="2s" repeatCount="indefinite" />
         </circle>
         {/* Inner orb */}
-        <circle cx="170" cy="52" r="14" fill="url(#orbGlow)" filter="url(#softGlow)">
-          <animate attributeName="r" values="12;16;12" dur="3s" repeatCount="indefinite" />
+        <circle cx="355" cy="180" r="18" fill="url(#orbGlow)" filter="url(#softGlow)">
+          <animate attributeName="r" values="16;20;16" dur="2s" repeatCount="indefinite" />
         </circle>
         {/* Bright core */}
-        <circle cx="170" cy="52" r="5" fill="#ffffff" opacity="0.9">
-          <animate attributeName="r" values="4;6;4" dur="2s" repeatCount="indefinite" />
-          <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite" />
+        <circle cx="355" cy="180" r="6" fill="#ffffff" opacity="0.9">
+          <animate attributeName="r" values="5;8;5" dur="1s" repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0.8;1;0.8" dur="1s" repeatCount="indefinite" />
         </circle>
-
-        {/* Sparkles around orb */}
-        <circle cx="148" cy="40" r="1.5" fill="#ffffff" opacity="0">
-          <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite" begin="0s" />
-        </circle>
-        <circle cx="192" cy="38" r="1" fill="#f0d878" opacity="0">
-          <animate attributeName="opacity" values="0;1;0" dur="2.5s" repeatCount="indefinite" begin="0.7s" />
-        </circle>
-        <circle cx="158" cy="30" r="1.2" fill="#b388ff" opacity="0">
-          <animate attributeName="opacity" values="0;1;0" dur="1.8s" repeatCount="indefinite" begin="1.2s" />
-        </circle>
-        <circle cx="185" cy="65" r="0.8" fill="#ffffff" opacity="0">
-          <animate attributeName="opacity" values="0;1;0" dur="2.2s" repeatCount="indefinite" begin="0.3s" />
-        </circle>
-        <circle cx="155" cy="60" r="1" fill="#f0d878" opacity="0">
-          <animate attributeName="opacity" values="0;1;0" dur="1.6s" repeatCount="indefinite" begin="1.8s" />
-        </circle>
-        {/* 4-point star sparkle */}
-        <g opacity="0" transform="translate(195, 48)">
-          <animate attributeName="opacity" values="0;1;0" dur="3s" repeatCount="indefinite" begin="0.5s" />
-          <line x1="0" y1="-4" x2="0" y2="4" stroke="#f0d878" strokeWidth="0.8" />
-          <line x1="-4" y1="0" x2="4" y2="0" stroke="#f0d878" strokeWidth="0.8" />
-        </g>
-        <g opacity="0" transform="translate(145, 45)">
-          <animate attributeName="opacity" values="0;1;0" dur="2.5s" repeatCount="indefinite" begin="1.5s" />
-          <line x1="0" y1="-3" x2="0" y2="3" stroke="#ffffff" strokeWidth="0.6" />
-          <line x1="-3" y1="0" x2="3" y2="0" stroke="#ffffff" strokeWidth="0.6" />
-        </g>
 
         {/* === WAND === */}
-        {/* Wand shaft - pointed tip tapering to handle */}
+        {/* Wand shaft - pointing right */}
         <path
-          d="M170 65 L166 150 L165 260 Q165 268 170 268 Q175 268 175 260 L174 150 Z"
+          d="M150 200 L350 185 L350 175 L150 190 Z"
           fill="url(#wandBody)"
           stroke="#A07828"
           strokeWidth="0.5"
         />
         {/* Highlight streak on wand */}
         <path
-          d="M169 70 L168 150 L168.5 250"
+          d="M150 195 L340 180"
           stroke="#c9a84c"
-          strokeWidth="0.5"
-          opacity="0.3"
+          strokeWidth="1"
+          opacity="0.5"
         />
-        {/* Handle wrap - thicker grip section */}
-        <rect x="163" y="230" width="14" height="38" rx="3" fill="url(#handleGrad)" stroke="#A07828" strokeWidth="0.5" />
+        {/* Handle wrap */}
+        <rect x="110" y="192" width="45" height="14" rx="4" fill="url(#handleGrad)" stroke="#A07828" strokeWidth="0.5" transform="rotate(-5, 110, 192)" />
         {/* Grip rings */}
-        <line x1="163" y1="238" x2="177" y2="238" stroke="#c9a84c" strokeWidth="0.5" opacity="0.3" />
-        <line x1="163" y1="245" x2="177" y2="245" stroke="#c9a84c" strokeWidth="0.5" opacity="0.3" />
-        <line x1="163" y1="252" x2="177" y2="252" stroke="#c9a84c" strokeWidth="0.5" opacity="0.3" />
-        <line x1="163" y1="259" x2="177" y2="259" stroke="#c9a84c" strokeWidth="0.5" opacity="0.3" />
-        {/* Small gem where shaft meets handle */}
-        <ellipse cx="170" cy="228" rx="5" ry="3" fill="#7b4bb3" opacity="0.6" filter="url(#softGlow)" />
+        <line x1="120" y1="190" x2="120" y2="204" stroke="#c9a84c" strokeWidth="1" opacity="0.4" transform="rotate(-5, 110, 192)" />
+        <line x1="130" y1="190" x2="130" y2="204" stroke="#c9a84c" strokeWidth="1" opacity="0.4" transform="rotate(-5, 110, 192)" />
+        <line x1="140" y1="190" x2="140" y2="204" stroke="#c9a84c" strokeWidth="1" opacity="0.4" transform="rotate(-5, 110, 192)" />
+        {/* Small gem at base */}
+        <ellipse cx="108" cy="200" rx="4" ry="6" fill="#7b4bb3" opacity="0.8" filter="url(#softGlow)" />
 
-        {/* === BOY HOLDING WAND === */}
-        {/* Body / Robe */}
+        {/* === BOY HOLDING WAND (facing right) === */}
+        {/* Robe/Body */}
         <path
-          d="M130 370 Q130 355 145 345 L155 340 L170 335 L185 340 L195 345 Q210 355 210 370 L215 440 L125 440 Z"
+          d="M120 220 Q140 280 145 400 L40 400 Q45 280 70 220 Z"
           fill="url(#robeGrad)"
           stroke="#2d1b4e"
-          strokeWidth="0.5"
+          strokeWidth="1"
         />
-        {/* Robe collar / hood */}
+        {/* Robe folds */}
+        <path d="M100 240 Q110 320 115 400" stroke="#1a1035" strokeWidth="2" fill="none" />
+        <path d="M70 260 Q80 330 85 400" stroke="#1a1035" strokeWidth="2" fill="none" />
+
+        {/* Hood/Collar */}
         <path
-          d="M148 345 Q155 330 170 325 Q185 330 192 345 L188 350 Q180 338 170 335 Q160 338 152 350 Z"
+          d="M60 190 Q80 230 110 230 Q130 230 140 210 Q120 180 100 180 Q80 180 60 190 Z"
           fill="url(#hoodGrad)"
-          stroke="#2d1b4e"
-          strokeWidth="0.5"
+          stroke="#1a1035"
+          strokeWidth="1"
         />
-        {/* Robe center seam */}
-        <line x1="170" y1="340" x2="170" y2="440" stroke="#2d1b4e" strokeWidth="0.5" opacity="0.5" />
-        {/* Star emblem on robe */}
-        <g transform="translate(170, 380)" opacity="0.3">
-          <line x1="0" y1="-5" x2="0" y2="5" stroke="#c9a84c" strokeWidth="0.7" />
-          <line x1="-5" y1="0" x2="5" y2="0" stroke="#c9a84c" strokeWidth="0.7" />
-          <line x1="-3.5" y1="-3.5" x2="3.5" y2="3.5" stroke="#c9a84c" strokeWidth="0.5" />
-          <line x1="3.5" y1="-3.5" x2="-3.5" y2="3.5" stroke="#c9a84c" strokeWidth="0.5" />
-        </g>
 
         {/* Head */}
-        <ellipse cx="170" cy="312" rx="18" ry="20" fill="url(#skinTone)" />
-        {/* Hair */}
+        <ellipse cx="95" cy="140" rx="30" ry="35" fill="url(#skinTone)" />
+
+        {/* Hair - swept back dynamically */}
         <path
-          d="M152 308 Q152 292 170 290 Q188 292 188 308 Q185 298 170 296 Q155 298 152 308Z"
+          d="M65 145 Q60 100 95 100 Q125 100 135 120 Q125 110 95 110 Q70 115 70 145 Z"
           fill="#2A1A0A"
         />
-        {/* Eyes */}
-        <ellipse cx="163" cy="314" rx="2.5" ry="2" fill="#1a1a2e" />
-        <ellipse cx="177" cy="314" rx="2.5" ry="2" fill="#1a1a2e" />
-        {/* Eye shine */}
-        <circle cx="164" cy="313.5" r="0.8" fill="#f0d878" opacity="0.7">
-          <animate attributeName="opacity" values="0.5;0.9;0.5" dur="3s" repeatCount="indefinite" />
-        </circle>
-        <circle cx="178" cy="313.5" r="0.8" fill="#f0d878" opacity="0.7">
-          <animate attributeName="opacity" values="0.5;0.9;0.5" dur="3s" repeatCount="indefinite" />
-        </circle>
-        {/* Slight smile */}
-        <path d="M165 320 Q170 324 175 320" stroke="#8B6040" strokeWidth="0.8" fill="none" />
-        {/* Eyebrows - slightly raised in wonder */}
-        <path d="M159 309 Q163 307 167 309" stroke="#2A1A0A" strokeWidth="0.8" fill="none" />
-        <path d="M173 309 Q177 307 181 309" stroke="#2A1A0A" strokeWidth="0.8" fill="none" />
+        <path d="M90 105 Q120 110 135 130 Q115 125 90 115 Z" fill="#3D2B06" opacity="0.5" />
 
-        {/* RIGHT ARM holding wand up */}
-        {/* Upper arm */}
-        <path
-          d="M190 348 Q195 342 195 330 L198 328 Q202 340 198 352 Z"
-          fill="url(#hoodGrad)"
-        />
-        {/* Forearm going up toward wand */}
-        <path
-          d="M195 330 Q190 310 183 290 L187 288 Q194 308 198 328 Z"
-          fill="url(#hoodGrad)"
-        />
-        {/* Right hand gripping wand */}
-        <ellipse cx="172" cy="272" rx="8" ry="6" fill="url(#skinTone)" transform="rotate(-10, 172, 272)" />
-        {/* Fingers wrapping */}
-        <path d="M166 268 Q164 272 166 276" stroke="#C4956A" strokeWidth="1.2" fill="none" />
-        <path d="M169 267 Q167 272 169 277" stroke="#C4956A" strokeWidth="1" fill="none" />
-        <path d="M176 268 Q178 272 176 276" stroke="#C4956A" strokeWidth="1" fill="none" />
+        {/* Ear */}
+        <ellipse cx="65" cy="145" rx="5" ry="8" fill="url(#skinTone)" />
 
-        {/* LEFT ARM at side */}
+        {/* Eye (facing right, profile/3/4 view) */}
+        <ellipse cx="115" cy="135" rx="3.5" ry="5" fill="#1a1a2e" />
+        {/* Eye shine reflecting the magic */}
+        <circle cx="116" cy="134" r="1.5" fill="#f0d878" opacity="0.9">
+          <animate attributeName="opacity" values="0.6;1;0.6" dur="1s" repeatCount="indefinite" />
+        </circle>
+
+        {/* Eyebrow - determined/focused */}
+        <path d="M108 125 Q115 122 122 126" stroke="#2A1A0A" strokeWidth="2" fill="none" />
+
+        {/* Nose */}
+        <path d="M125 140 Q130 145 125 150" stroke="#C4956A" strokeWidth="1.5" fill="none" />
+
+        {/* Mouth - slight smile/focus */}
+        <path d="M115 160 Q120 162 125 158" stroke="#8B6040" strokeWidth="1.5" fill="none" />
+
+        {/* Right Arm (extended, holding wand) */}
+        {/* Upper sleeve */}
         <path
-          d="M150 348 Q142 355 138 370 L135 390 L140 392 L145 372 Q148 358 152 352 Z"
+          d="M100 200 Q120 220 140 240 L160 210 Q130 180 110 170 Z"
           fill="url(#hoodGrad)"
         />
-        {/* Left hand */}
-        <ellipse cx="136" cy="392" rx="5" ry="4" fill="url(#skinTone)" />
+        {/* Lower sleeve/cuff */}
+        <path
+          d="M140 240 Q150 250 170 230 L155 200 Z"
+          fill="url(#robeGrad)"
+        />
+
+        {/* Hand holding wand */}
+        <ellipse cx="130" cy="205" rx="10" ry="12" fill="url(#skinTone)" transform="rotate(-15, 130, 205)" />
+        {/* Fingers over wand */}
+        <path d="M128 198 Q132 195 135 198" stroke="#C4956A" strokeWidth="2" fill="none" />
+        <path d="M125 202 Q130 198 135 202" stroke="#C4956A" strokeWidth="2" fill="none" />
+        <path d="M123 207 Q128 202 133 207" stroke="#C4956A" strokeWidth="2" fill="none" />
+
+        {/* Left Arm (tucked back) */}
+        <path
+          d="M70 200 Q50 240 60 280 L80 270 Q60 220 80 190 Z"
+          fill="url(#robeGrad)"
+          opacity="0.8"
+        />
+
       </svg>
     </motion.div>
   );
 }
+

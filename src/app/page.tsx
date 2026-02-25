@@ -27,29 +27,33 @@ export default function Home() {
             transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
           />
 
-          <div className="relative z-10 flex flex-col items-center">
-            <WandIllustration />
+          <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 md:gap-24 pt-20">
+            {/* Left side: Boy pointing wand to the right */}
+            <div className="flex-1 w-full max-w-md md:max-w-lg lg:max-w-xl flex justify-center md:justify-end relative">
+              <WandIllustration />
+            </div>
 
+            {/* Right side: Hero Text */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="mt-8"
+              className="flex-1 flex flex-col items-center md:items-start text-center md:text-left pt-8 md:pt-0"
             >
               <p
-                className="text-[var(--purple-light)] tracking-[0.4em] uppercase text-[10px] mb-3"
+                className="text-[var(--purple-light)] tracking-[0.4em] uppercase text-xs md:text-sm mb-4 font-semibold"
                 style={{ fontFamily: "var(--font-cinzel)" }}
               >
                 Forged in code & resin
               </p>
               <h1
-                className="text-shimmer text-5xl md:text-7xl lg:text-8xl font-bold"
+                className="text-shimmer text-6xl md:text-7xl lg:text-8xl font-bold leading-tight md:leading-[1.1] mb-6"
                 style={{ fontFamily: "var(--font-cinzel)" }}
               >
                 The Wizard Wand
               </h1>
               <p
-                className="mt-4 text-[var(--foreground)]/50 text-lg md:text-xl max-w-md mx-auto"
+                className="text-[var(--foreground)]/70 text-lg md:text-2xl max-w-lg mx-auto md:mx-0 leading-relaxed font-light mt-4"
                 style={{ fontFamily: "var(--font-crimson)" }}
               >
                 A real, hand-crafted wand. 3D printed. Hand-painted. One of a kind.
@@ -61,50 +65,55 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1 }}
-              className="mt-10 flex flex-col items-center gap-4"
+              className="mt-12 flex flex-col md:flex-row items-center md:items-start gap-8 z-20 relative"
             >
+              <div className="flex flex-col items-center md:items-start gap-4">
+                <motion.button
+                  className="relative px-12 py-5 text-sm md:text-base uppercase tracking-[0.25em] rounded-full overflow-hidden cursor-pointer shadow-[0_0_40px_rgba(201,168,76,0.15)] hover:shadow-[0_0_60px_rgba(201,168,76,0.25)] transition-shadow duration-300"
+                  style={{ fontFamily: "var(--font-cinzel)" }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  {/* Button glow bg */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-[var(--gold)] via-[var(--gold-light)] to-[var(--gold)] opacity-90" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-[var(--gold)] via-[#fff] to-[var(--gold)] opacity-0 hover:opacity-30 transition-opacity duration-500" />
+                  <span className="relative z-10 text-[#0a0515] font-bold text-lg">
+                    Pre-Order Now
+                  </span>
+                </motion.button>
+                <p
+                  className="text-4xl md:text-5xl font-bold text-[var(--gold-light)] ml-2"
+                  style={{ fontFamily: "var(--font-cinzel)" }}
+                >
+                  $39
+                </p>
+              </div>
+
               <p
-                className="text-4xl md:text-5xl font-bold text-[var(--gold-light)]"
-                style={{ fontFamily: "var(--font-cinzel)" }}
-              >
-                $39
-              </p>
-              <motion.button
-                className="relative px-12 py-4 text-sm md:text-base uppercase tracking-[0.25em] rounded-full overflow-hidden cursor-pointer"
-                style={{ fontFamily: "var(--font-cinzel)" }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-              >
-                {/* Button glow bg */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[var(--gold)] via-[var(--gold-light)] to-[var(--gold)] opacity-90" />
-                <div className="absolute inset-0 bg-gradient-to-r from-[var(--gold)] via-[#fff] to-[var(--gold)] opacity-0 hover:opacity-30 transition-opacity duration-500" />
-                <span className="relative z-10 text-[#0a0515] font-semibold">
-                  Pre-Order Now
-                </span>
-              </motion.button>
-              <p
-                className="text-[var(--foreground)]/30 text-xs"
+                className="text-[var(--foreground)]/50 text-sm md:text-base max-w-[200px] text-center md:text-left leading-relaxed mt-2"
                 style={{ fontFamily: "var(--font-crimson)" }}
               >
-                Free shipping — Ships in 2-3 weeks
+                <span className="block text-[var(--gold)] mb-1">Free shipping</span>
+                Ships in 2-3 weeks
               </p>
             </motion.div>
-
-            {/* Scroll indicator */}
-            <motion.div
-              className="mt-16 flex flex-col items-center gap-2"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 2, duration: 1 }}
-            >
-              <motion.div
-                className="w-[1px] h-6 bg-gradient-to-b from-[var(--gold)]/40 to-transparent"
-                animate={{ scaleY: [0, 1, 0] }}
-                transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-                style={{ transformOrigin: "top" }}
-              />
-            </motion.div>
           </div>
+
+          {/* Scroll indicator */}
+          <motion.div
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 2, duration: 1 }}
+          >
+            <span className="text-[10px] uppercase tracking-widest text-[var(--gold)]/50 mb-2">Scroll</span>
+            <motion.div
+              className="w-[1px] h-12 bg-gradient-to-b from-[var(--gold)] to-transparent"
+              animate={{ scaleY: [0, 1, 0], opacity: [0.3, 1, 0.3] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+              style={{ transformOrigin: "top" }}
+            />
+          </motion.div>
         </section>
 
         {/* ===== SPECS BAR ===== */}
