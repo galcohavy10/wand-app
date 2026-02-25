@@ -2,22 +2,10 @@
 
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
-import Script from "next/script";
 import MagicReveal from "@/components/MagicReveal";
 import WandIllustration from "@/components/WandIllustration";
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      'stripe-buy-button': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
-        'buy-button-id'?: string;
-        'publishable-key'?: string;
-        'client-reference-id'?: string;
-        'customer-email'?: string;
-      };
-    }
-  }
-}
+const CHECKOUT_URL = "https://buy.stripe.com/bJeaEWfQx45j34B21zbjW03";
 
 const CSSParticles = dynamic(() => import("@/components/CSSParticles"), {
   ssr: false,
@@ -112,7 +100,7 @@ export default function Home() {
                 lineHeight: 1.6,
                 fontWeight: 300,
               }}>
-                Cast real spells with a real wand.
+                Cast real spells in your home.
               </p>
 
               {/* Product card */}
@@ -135,24 +123,39 @@ export default function Home() {
                 }}
               >
                 <div style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid rgba(201,168,76,0.1)", paddingBottom: 16 }}>
-                  <span style={{ fontFamily: "var(--font-cinzel)", color: "rgba(232,224,240,0.5)", textTransform: "uppercase", letterSpacing: "0.15em", fontSize: "0.65rem", fontWeight: 600 }}>Initial Batch</span>
-                  <span style={{ fontFamily: "var(--font-cinzel)", fontSize: "1.75rem", fontWeight: 700, color: "var(--gold-light)" }}>$39</span>
+                  <span style={{ fontFamily: "var(--font-cinzel)", color: "rgba(232,224,240,0.5)", textTransform: "uppercase", letterSpacing: "0.15em", fontSize: "0.65rem", fontWeight: 600 }}>Limited Wands</span>
+                  <span style={{ fontFamily: "var(--font-cinzel)", fontSize: "1.75rem", fontWeight: 700, color: "var(--gold-light)" }}>$49</span>
                 </div>
 
-                <img
-                  src="https://m.media-amazon.com/images/I/615123EN3SL.jpg"
-                  alt="Wizard Wand"
-                  style={{ width: "100%", height: 120, objectFit: "cover", borderRadius: 8, border: "1px solid rgba(201,168,76,0.15)" }}
-                />
-
-                <Script async src="https://js.stripe.com/v3/buy-button.js" />
-                <stripe-buy-button
-                  buy-button-id="buy_btn_1T4ejJCsorpj44AOlGKIhpRK"
-                  publishable-key="pk_live_51Sfm9BCsorpj44AO1ARZCDrRyKQfgXSoGGvLoZJTkBEzmIKxjXePzYRGNI0mkmDzoJQRSbwH0T2odJhVGaBJMbZr00L7EwIJv6"
-                ></stripe-buy-button>
+                <motion.a
+                  href={CHECKOUT_URL}
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "block",
+                    width: "100%",
+                    padding: "14px 0",
+                    fontSize: "0.85rem",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.2em",
+                    borderRadius: 9999,
+                    cursor: "pointer",
+                    border: "none",
+                    fontFamily: "var(--font-cinzel)",
+                    fontWeight: 700,
+                    background: "linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold))",
+                    color: "#0a0515",
+                    textAlign: "center",
+                    textDecoration: "none",
+                    boxShadow: "0 0 30px rgba(201,168,76,0.2)",
+                  }}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  Buy Now
+                </motion.a>
 
                 <p style={{ fontFamily: "var(--font-crimson)", color: "rgba(232,224,240,0.4)", fontSize: "0.75rem", textAlign: "center" }}>
-                  <span style={{ color: "var(--gold)" }}>Free shipping</span> — Ships in 2-3 weeks
+                  <span style={{ color: "var(--gold)" }}>FREE SHIPPING</span> GLOBAL
                 </p>
               </motion.div>
             </motion.div>
@@ -285,10 +288,12 @@ export default function Home() {
               First batch. Limited run.
             </p>
             <p style={{ fontFamily: "var(--font-cinzel)", fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 700, color: "var(--gold-light)", marginBottom: 32 }}>
-              $39
+              $49
             </p>
-            <motion.button
+            <motion.a
+              href={CHECKOUT_URL}
               style={{
+                display: "inline-block",
                 padding: "18px 56px",
                 fontSize: "1rem",
                 textTransform: "uppercase",
@@ -300,13 +305,14 @@ export default function Home() {
                 fontWeight: 700,
                 background: "linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold))",
                 color: "#0a0515",
+                textDecoration: "none",
                 boxShadow: "0 0 40px rgba(201,168,76,0.2)",
               }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
             >
-              Pre-Order Now
-            </motion.button>
+              Buy Now
+            </motion.a>
             <p style={{ fontFamily: "var(--font-cinzel)", color: "rgba(232,224,240,0.35)", fontSize: "0.7rem", marginTop: 24, textTransform: "uppercase", letterSpacing: "0.15em" }}>
               <span style={{ color: "var(--gold)", fontWeight: 700 }}>Free shipping</span> — Ships in 2-3 weeks
             </p>

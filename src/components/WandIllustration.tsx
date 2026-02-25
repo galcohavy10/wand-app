@@ -94,10 +94,26 @@ export default function WandIllustration() {
         <path d="M350 180 Q420 185 500 190" stroke="url(#beamGradient)" strokeWidth="3" strokeLinecap="round" opacity="0.6" filter="url(#beamGlow)" />
 
         {/* Particles along the beam */}
-        {[...Array(15)].map((_, i) => (
-          <circle key={i} cx={360 + Math.random() * 140} cy={165 + Math.random() * 30} r={1 + Math.random() * 2} fill="#f0d878" opacity="0">
-            <animate attributeName="opacity" values="0;1;0" dur={`${0.5 + Math.random() * 1.5}s`} repeatCount="indefinite" begin={`${Math.random() * 2}s`} />
-            <animate attributeName="cx" values={`${360 + Math.random() * 20};${500}`} dur={`${0.5 + Math.random() * 1.5}s`} repeatCount="indefinite" begin={`${Math.random() * 2}s`} />
+        {[
+          { cx: 382, cy: 172, r: 1.5, dur: 0.8, begin: 0.3, cxStart: 364 },
+          { cx: 421, cy: 181, r: 1.3, dur: 1.2, begin: 0.9, cxStart: 371 },
+          { cx: 395, cy: 176, r: 2.1, dur: 1.6, begin: 0.1, cxStart: 368 },
+          { cx: 448, cy: 169, r: 1.8, dur: 0.9, begin: 1.5, cxStart: 375 },
+          { cx: 467, cy: 185, r: 1.2, dur: 1.4, begin: 0.6, cxStart: 362 },
+          { cx: 410, cy: 190, r: 2.5, dur: 1.1, begin: 1.8, cxStart: 369 },
+          { cx: 436, cy: 173, r: 1.7, dur: 0.7, begin: 0.4, cxStart: 377 },
+          { cx: 475, cy: 188, r: 1.4, dur: 1.9, begin: 1.2, cxStart: 366 },
+          { cx: 390, cy: 180, r: 2.0, dur: 1.3, begin: 0.7, cxStart: 373 },
+          { cx: 455, cy: 170, r: 1.6, dur: 0.6, begin: 1.0, cxStart: 365 },
+          { cx: 485, cy: 183, r: 1.9, dur: 1.7, begin: 0.2, cxStart: 370 },
+          { cx: 402, cy: 178, r: 2.3, dur: 1.0, begin: 1.6, cxStart: 374 },
+          { cx: 430, cy: 192, r: 1.1, dur: 1.5, begin: 0.5, cxStart: 367 },
+          { cx: 460, cy: 167, r: 2.7, dur: 0.8, begin: 1.3, cxStart: 376 },
+          { cx: 493, cy: 186, r: 1.3, dur: 1.8, begin: 0.8, cxStart: 363 },
+        ].map((p, i) => (
+          <circle key={i} cx={p.cx} cy={p.cy} r={p.r} fill="#f0d878" opacity="0">
+            <animate attributeName="opacity" values="0;1;0" dur={`${p.dur}s`} repeatCount="indefinite" begin={`${p.begin}s`} />
+            <animate attributeName="cx" values={`${p.cxStart};500`} dur={`${p.dur}s`} repeatCount="indefinite" begin={`${p.begin}s`} />
           </circle>
         ))}
 
@@ -191,11 +207,12 @@ export default function WandIllustration() {
         {/* Eyebrow - determined/focused */}
         <path d="M108 125 Q115 122 122 126" stroke="#2A1A0A" strokeWidth="2" fill="none" />
 
-        {/* Nose */}
-        <path d="M125 140 Q130 145 125 150" stroke="#C4956A" strokeWidth="1.5" fill="none" />
+        {/* Nose - protruding profile nose */}
+        <path d="M120 138 Q130 143 128 150 Q124 152 120 150" fill="#C4956A" />
+        <path d="M120 138 Q130 143 128 150" stroke="#B8875A" strokeWidth="0.5" fill="none" />
 
-        {/* Mouth - slight smile/focus */}
-        <path d="M115 160 Q120 162 125 158" stroke="#8B6040" strokeWidth="1.5" fill="none" />
+        {/* Mouth - closed gentle smile */}
+        <path d="M108 160 Q114 164 120 160" stroke="#A0604A" strokeWidth="1.2" fill="none" strokeLinecap="round" />
 
         {/* Right Arm (extended, holding wand) */}
         {/* Upper sleeve */}
