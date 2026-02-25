@@ -10,8 +10,8 @@ const wandMotions = [
   { rotate: [0, -3, 4, 1, 0], x: [0, -6, 3, 0], transition: { duration: 0.7, times: [0, 0.2, 0.5, 0.8, 1] } },
   // Aguavate: gentle arc downward
   { rotate: [0, 3, -2, 1, 0], y: [0, 2, -2, 0], transition: { duration: 0.8, times: [0, 0.25, 0.5, 0.75, 1] } },
-  // Hocus Unfocus: punchy thrust forward
-  { rotate: [0, -4, 5, -1, 0], x: [0, -3, 6, 1, 0], scale: [1, 1, 1.03, 1, 1], transition: { duration: 0.5, times: [0, 0.2, 0.5, 0.8, 1] } },
+  // Hocus Unfocus: smooth steady push forward
+  { rotate: [0, -2, 3, 0], x: [0, -2, 4, 0], transition: { duration: 0.8, times: [0, 0.3, 0.65, 1], ease: "easeInOut" as const } },
   // Breezio: wide circular flourish
   { rotate: [0, -8, 0, 5, 0], y: [0, -5, 0, 3, 0], transition: { duration: 0.9, times: [0, 0.25, 0.5, 0.75, 1] } },
 ];
@@ -30,10 +30,9 @@ export default function WandIllustration({ isCasting = true, spellIndex = 0 }: {
       <motion.div
         animate={isCasting ? {
           rotate: motionVariant.rotate,
-          x: motionVariant.x || 0,
-          y: motionVariant.y || 0,
-          scale: motionVariant.scale || 1,
-        } : { rotate: 0, x: 0, y: 0, scale: 1 }}
+          x: 'x' in motionVariant ? motionVariant.x : 0,
+          y: 'y' in motionVariant ? motionVariant.y : 0,
+        } : { rotate: 0, x: 0, y: 0 }}
         transition={isCasting ? motionVariant.transition : { duration: 0.4 }}
         style={{ transformOrigin: "25% 60%" }}
       >
