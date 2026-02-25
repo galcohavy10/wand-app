@@ -28,135 +28,167 @@ export default function Home() {
     <>
       <CSSParticles />
 
-      <main className="relative z-10">
+      <main style={{ position: "relative", zIndex: 10 }}>
         {/* ===== HERO ===== */}
-        <section className="min-h-screen flex flex-col items-center justify-center text-center px-6 relative">
+        <section style={{
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          textAlign: "center",
+          padding: "0 24px",
+          position: "relative",
+        }}>
           {/* Radial bg */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(45,27,78,0.3)_0%,_transparent_70%)]" />
+          <div style={{
+            position: "absolute",
+            inset: 0,
+            background: "radial-gradient(ellipse at center, rgba(45,27,78,0.3) 0%, transparent 70%)",
+          }} />
 
           {/* Slow rotating ring */}
           <motion.div
-            className="absolute w-[500px] h-[500px] rounded-full border border-[var(--gold)]/[0.06]"
+            style={{
+              position: "absolute",
+              width: 500,
+              height: 500,
+              borderRadius: "50%",
+              border: "1px solid rgba(201,168,76,0.06)",
+            }}
             animate={{ rotate: 360 }}
             transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
           />
 
-          <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 md:gap-24 pt-20">
-            {/* Left side: Boy pointing wand to the right */}
-            <div className="flex-1 w-full max-w-md md:max-w-lg lg:max-w-xl flex justify-center md:justify-end relative">
+          <div style={{
+            position: "relative",
+            zIndex: 10,
+            width: "100%",
+            maxWidth: 1200,
+            margin: "0 auto",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 48,
+            paddingTop: 80,
+          }}>
+            {/* Wand Illustration */}
+            <div style={{ width: "100%", maxWidth: 500 }}>
               <WandIllustration />
             </div>
 
-            {/* Right side: Hero Text */}
+            {/* Hero Text */}
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="flex-1 flex flex-col items-center md:items-start text-center md:text-left pt-8 md:pt-0"
+              style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}
             >
-              <p
-                className="text-[var(--purple-light)] tracking-[0.4em] uppercase text-xs md:text-sm mb-4 font-semibold"
-                style={{ fontFamily: "var(--font-cinzel)" }}
-              >
+              <p style={{
+                fontFamily: "var(--font-cinzel)",
+                color: "var(--purple-light)",
+                textTransform: "uppercase",
+                letterSpacing: "0.4em",
+                fontSize: "0.75rem",
+                fontWeight: 600,
+                marginBottom: 16,
+              }}>
                 Forged in Resin
               </p>
-              <h1
-                className="text-shimmer text-6xl md:text-7xl lg:text-8xl font-bold leading-tight md:leading-[1.1] mb-6"
-                style={{ fontFamily: "var(--font-cinzel)" }}
-              >
+              <h1 className="text-shimmer" style={{
+                fontFamily: "var(--font-cinzel)",
+                fontSize: "clamp(3rem, 8vw, 5.5rem)",
+                fontWeight: 700,
+                lineHeight: 1.1,
+                marginBottom: 16,
+              }}>
                 The Wizard Wand
               </h1>
-              <p
-                className="text-[var(--foreground)]/70 text-lg md:text-2xl max-w-lg mx-auto md:mx-0 leading-relaxed font-light mt-4"
-                style={{ fontFamily: "var(--font-crimson)" }}
-              >
+              <p style={{
+                fontFamily: "var(--font-crimson)",
+                color: "rgba(232,224,240,0.7)",
+                fontSize: "clamp(1rem, 2.5vw, 1.5rem)",
+                maxWidth: 480,
+                lineHeight: 1.6,
+                fontWeight: 300,
+              }}>
                 Cast real spells with a real wand.
               </p>
 
-              {/* Product Info & CTA */}
+              {/* Product card */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 1 }}
-                className="mt-12 flex flex-col gap-6 items-center md:items-start z-20 relative bg-[rgba(45,27,78,0.2)] p-8 rounded-2xl border border-[var(--gold)]/20 shadow-[0_0_30px_rgba(201,168,76,0.05)] w-full max-w-md"
+                style={{
+                  marginTop: 48,
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 20,
+                  alignItems: "center",
+                  padding: 32,
+                  borderRadius: 16,
+                  border: "1px solid rgba(201,168,76,0.15)",
+                  background: "rgba(45,27,78,0.15)",
+                  width: "100%",
+                  maxWidth: 400,
+                }}
               >
-                <div className="w-full flex justify-between items-center border-b border-[var(--gold)]/10 pb-4 mb-2">
-                  <span className="text-[var(--foreground)]/60 uppercase tracking-widest text-xs font-semibold" style={{ fontFamily: "var(--font-cinzel)" }}>Initial Batch</span>
-                  <p
-                    className="text-3xl font-bold text-[var(--gold-light)]"
-                    style={{ fontFamily: "var(--font-cinzel)" }}
-                  >
-                    $39
-                  </p>
+                <div style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid rgba(201,168,76,0.1)", paddingBottom: 16 }}>
+                  <span style={{ fontFamily: "var(--font-cinzel)", color: "rgba(232,224,240,0.5)", textTransform: "uppercase", letterSpacing: "0.15em", fontSize: "0.65rem", fontWeight: 600 }}>Initial Batch</span>
+                  <span style={{ fontFamily: "var(--font-cinzel)", fontSize: "1.75rem", fontWeight: 700, color: "var(--gold-light)" }}>$39</span>
                 </div>
 
-                <div className="w-full flex justify-center">
-                  <img
-                    src="https://m.media-amazon.com/images/I/615123EN3SL.jpg"
-                    alt="Wand Placeholder"
-                    className="w-full h-32 object-cover rounded-lg drop-shadow-[0_0_15px_rgba(201,168,76,0.4)] hover:scale-105 transition-transform duration-500 my-4 border border-[var(--gold)]/20"
-                  />
-                </div>
+                <img
+                  src="https://m.media-amazon.com/images/I/615123EN3SL.jpg"
+                  alt="Wizard Wand"
+                  style={{ width: "100%", height: 120, objectFit: "cover", borderRadius: 8, border: "1px solid rgba(201,168,76,0.15)" }}
+                />
 
-                <div className="w-full flex flex-col items-center gap-4">
-                  {/* Next Script to load stripe component properly */}
-                  <Script async src="https://js.stripe.com/v3/buy-button.js" />
+                <Script async src="https://js.stripe.com/v3/buy-button.js" />
+                <stripe-buy-button
+                  buy-button-id="buy_btn_1T4ejJCsorpj44AOlGKIhpRK"
+                  publishable-key="pk_live_51Sfm9BCsorpj44AO1ARZCDrRyKQfgXSoGGvLoZJTkBEzmIKxjXePzYRGNI0mkmDzoJQRSbwH0T2odJhVGaBJMbZr00L7EwIJv6"
+                ></stripe-buy-button>
 
-                  <stripe-buy-button
-                    buy-button-id="prod_U2iltPmfsIBEaE"
-                    publishable-key="pk_live_XXXXXXXXXXXXXXXXXXXX"
-                  ></stripe-buy-button>
-
-                  <p
-                    className="text-[var(--foreground)]/50 text-xs text-center w-full leading-relaxed mt-2"
-                    style={{ fontFamily: "var(--font-crimson)" }}
-                  >
-                    <span className="text-[var(--gold)]">Free shipping</span> —
-                    Ships in 2-3 weeks
-                  </p>
-                </div>
+                <p style={{ fontFamily: "var(--font-crimson)", color: "rgba(232,224,240,0.4)", fontSize: "0.75rem", textAlign: "center" }}>
+                  <span style={{ color: "var(--gold)" }}>Free shipping</span> — Ships in 2-3 weeks
+                </p>
               </motion.div>
             </motion.div>
           </div>
 
           {/* Scroll indicator */}
           <motion.div
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+            style={{ position: "absolute", bottom: 32, left: "50%", transform: "translateX(-50%)", display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 2, duration: 1 }}
           >
-            <span className="text-[10px] uppercase tracking-widest text-[var(--gold)]/50 mb-2">Scroll</span>
+            <span style={{ fontSize: "0.6rem", textTransform: "uppercase", letterSpacing: "0.2em", color: "rgba(201,168,76,0.4)", marginBottom: 8 }}>Scroll</span>
             <motion.div
-              className="w-[1px] h-12 bg-gradient-to-b from-[var(--gold)] to-transparent"
+              style={{ width: 1, height: 48, background: "linear-gradient(to bottom, var(--gold), transparent)", transformOrigin: "top" }}
               animate={{ scaleY: [0, 1, 0], opacity: [0.3, 1, 0.3] }}
               transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-              style={{ transformOrigin: "top" }}
             />
           </motion.div>
         </section>
 
         {/* ===== SPECS BAR ===== */}
-        <section className="py-16 md:py-20 border-y border-[var(--gold)]/[0.08]">
+        <section style={{ padding: "60px 24px", borderTop: "1px solid rgba(201,168,76,0.08)", borderBottom: "1px solid rgba(201,168,76,0.08)" }}>
           <MagicReveal>
-            <div className="w-full max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-8 text-center px-6">
+            <div style={{ display: "flex", justifyContent: "center", gap: 48, flexWrap: "wrap", maxWidth: 800, margin: "0 auto" }}>
               {[
                 { label: "Material", value: "PLA+ Resin" },
-                { label: "Length", value: '12"' },
+                { label: "Length", value: '12 inch' },
                 { label: "Finish", value: "Hand-Painted" },
                 { label: "Core", value: "Weighted" },
               ].map((spec) => (
-                <div key={spec.label} className="flex flex-col items-center gap-2">
-                  <p
-                    className="text-xl md:text-2xl text-[var(--gold-light)] font-medium"
-                    style={{ fontFamily: "var(--font-cinzel)" }}
-                  >
+                <div key={spec.label} style={{ textAlign: "center", minWidth: 120 }}>
+                  <p style={{ fontFamily: "var(--font-cinzel)", fontSize: "1.25rem", color: "var(--gold-light)", fontWeight: 500 }}>
                     {spec.value}
                   </p>
-                  <p
-                    className="text-[var(--foreground)]/40 text-xs md:text-sm uppercase tracking-[0.2em]"
-                    style={{ fontFamily: "var(--font-cinzel)" }}
-                  >
+                  <p style={{ fontFamily: "var(--font-cinzel)", fontSize: "0.65rem", color: "rgba(232,224,240,0.35)", textTransform: "uppercase", letterSpacing: "0.2em", marginTop: 4 }}>
                     {spec.label}
                   </p>
                 </div>
@@ -166,164 +198,124 @@ export default function Home() {
         </section>
 
         {/* ===== FEATURES ===== */}
-        <section className="py-24 md:py-32 px-6">
-          <div className="w-full max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+        <section style={{ padding: "100px 24px" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 24, maxWidth: 900, margin: "0 auto" }}>
             {[
-              {
-                icon: "✦",
-                title: "3D Printed",
-                desc: "Designed in CAD. Printed layer by layer with precision.",
-              },
-              {
-                icon: "✋",
-                title: "Hand-Finished",
-                desc: "Sanded, primed, painted, and sealed by hand.",
-              },
-              {
-                icon: "⚡",
-                title: "Weighted Core",
-                desc: "Balanced weight for a satisfying feel. Not a toy.",
-              },
-              {
-                icon: "◈",
-                title: "One of a Kind",
-                desc: "No two are exactly alike. Your wand chooses you.",
-              },
+              { icon: "✦", title: "3D Printed", desc: "Designed in CAD. Homemade" },
+              { icon: "💥", title: "Cast Spells", desc: "Say spells out loud." },
+              { icon: "⚡", title: "Fully Integrated", desc: "Connects to lights, tv, and more." },
             ].map((feat, i) => (
               <MagicReveal key={feat.title} delay={i * 0.08}>
-                <motion.div
-                  className="flex flex-col items-center text-center p-10 md:p-12 rounded-3xl border border-[var(--gold)]/10 bg-[rgba(45,27,78,0.15)] hover:border-[var(--gold)]/30 transition-all duration-500 hover:bg-[rgba(45,27,78,0.25)] shadow-[0_4px_30px_rgba(0,0,0,0.1)]"
-                  whileHover={{ y: -5, transition: { duration: 0.3 } }}
-                >
-                  <span className="text-4xl text-[var(--gold)] block mb-6 drop-shadow-[0_0_10px_rgba(201,168,76,0.5)]">
-                    {feat.icon}
-                  </span>
-                  <h3
-                    className="text-xl md:text-2xl text-[var(--gold-light)] mb-4 font-semibold tracking-wide"
-                    style={{ fontFamily: "var(--font-cinzel)" }}
-                  >
-                    {feat.title}
-                  </h3>
-                  <p
-                    className="text-[var(--foreground)]/60 text-base md:text-lg leading-relaxed font-light"
-                    style={{ fontFamily: "var(--font-crimson)" }}
-                  >
-                    {feat.desc}
-                  </p>
-                </motion.div>
+                <div style={{
+                  textAlign: "center",
+                  padding: "40px 24px",
+                  borderRadius: 16,
+                  border: "1px solid rgba(201,168,76,0.1)",
+                  background: "rgba(45,27,78,0.12)",
+                }}>
+                  <span style={{ fontSize: "2rem", color: "var(--gold)", display: "block", marginBottom: 16 }}>{feat.icon}</span>
+                  <h3 style={{ fontFamily: "var(--font-cinzel)", fontSize: "1.1rem", color: "var(--gold-light)", marginBottom: 8, fontWeight: 600 }}>{feat.title}</h3>
+                  <p style={{ fontFamily: "var(--font-crimson)", fontSize: "0.95rem", color: "rgba(232,224,240,0.5)", lineHeight: 1.6 }}>{feat.desc}</p>
+                </div>
               </MagicReveal>
             ))}
           </div>
         </section>
 
-        <div className="magic-divider w-full max-w-2xl mx-auto opacity-50" />
+        {/* ===== DIVIDER ===== */}
+        <div className="magic-divider" style={{ maxWidth: 400, margin: "0 auto", opacity: 0.3 }} />
 
-        {/* ===== THE STORY (short) ===== */}
-        <section className="py-24 md:py-32 px-6 flex flex-col items-center text-center">
+        {/* ===== THE ORIGIN ===== */}
+        <section style={{ padding: "100px 24px", textAlign: "center" }}>
           <MagicReveal>
-            <p
-              className="text-[var(--purple-light)] tracking-[0.4em] uppercase text-sm font-bold mb-6 drop-shadow-[0_0_8px_rgba(179,136,255,0.4)]"
-              style={{ fontFamily: "var(--font-cinzel)" }}
-            >
+            <p style={{ fontFamily: "var(--font-cinzel)", color: "var(--purple-light)", textTransform: "uppercase", letterSpacing: "0.35em", fontSize: "0.7rem", fontWeight: 700, marginBottom: 20 }}>
               The Origin
             </p>
           </MagicReveal>
           <MagicReveal delay={0.1}>
-            <h2
-              className="text-4xl md:text-5xl lg:text-6xl mb-12 font-bold w-full max-w-4xl leading-tight text-[var(--gold-light)]"
-              style={{ fontFamily: "var(--font-cinzel)" }}
-            >
+            <h2 style={{ fontFamily: "var(--font-cinzel)", color: "var(--gold)", fontSize: "clamp(1.8rem, 5vw, 3rem)", fontWeight: 700, lineHeight: 1.2, marginBottom: 32 }}>
               From Keyboard to Workshop
             </h2>
           </MagicReveal>
           <MagicReveal delay={0.2}>
-            <div
-              className="w-full max-w-3xl mx-auto flex flex-col gap-8 text-[var(--foreground)]/80 text-xl md:text-2xl leading-loose font-light"
-              style={{ fontFamily: "var(--font-crimson)" }}
-            >
-              <p>
-                I&apos;m a software engineer who got tired of only building digital
-                things. I wanted to create something I could hold.
+            <div style={{ fontFamily: "var(--font-crimson)", color: "rgba(232,224,240,0.6)", fontSize: "1.1rem", lineHeight: 1.9, maxWidth: 560, margin: "0 auto" }}>
+              <p style={{ marginBottom: 20 }}>
+                I&apos;m a software engineer who got tired of only building digital things. I wanted to create something physical.
               </p>
               <p>
-                So I bought a 3D printer, failed a dozen times, and eventually
-                forged something that felt real — a wand, born from code and
-                resin, designed to make anyone feel like a wizard.
+                So I decided to become a wizard. I forged something that felt real. a wand, connected to a microphone, that could cast spells at home.
               </p>
-            </div>
-          </MagicReveal>
-          <MagicReveal delay={0.3}>
-            <div className="mt-16 flex items-center justify-center gap-6">
-              <div className="h-[1px] w-24 bg-gradient-to-r from-transparent to-[var(--gold)]/40" />
-              <span className="text-[var(--gold)]/40 text-xl">✦</span>
-              <div className="h-[1px] w-24 bg-gradient-to-l from-transparent to-[var(--gold)]/40" />
             </div>
           </MagicReveal>
         </section>
 
-        <div className="magic-divider w-full max-w-2xl mx-auto opacity-50" />
+        {/* ===== DIVIDER ===== */}
+        <div className="magic-divider" style={{ maxWidth: 400, margin: "0 auto", opacity: 0.3 }} />
 
         {/* ===== QUOTE ===== */}
-        <section className="py-32 px-6 flex flex-col items-center text-center">
+        <section style={{ padding: "100px 24px", textAlign: "center" }}>
           <MagicReveal>
-            <blockquote
-              className="text-3xl md:text-4xl lg:text-5xl font-bold w-full max-w-5xl mx-auto leading-[1.3] text-transparent bg-clip-text bg-gradient-to-r from-[var(--gold)] via-[var(--gold-light)] to-[var(--gold)]"
-              style={{ fontFamily: "var(--font-cinzel)" }}
-            >
-              &ldquo;The line between technology and magic has never been
-              thinner.&rdquo;
+            <blockquote style={{
+              fontFamily: "var(--font-cinzel)",
+              fontSize: "clamp(1.3rem, 4vw, 2.4rem)",
+              fontWeight: 700,
+              lineHeight: 1.4,
+              maxWidth: 680,
+              margin: "0 auto",
+              background: "linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold))",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}>
+              &ldquo;Any sufficiently advanced technology is indistinguishable from magic.&rdquo;
             </blockquote>
           </MagicReveal>
         </section>
 
         {/* ===== BOTTOM CTA ===== */}
-        <section className="py-24 md:py-32 px-6 flex flex-col items-center text-center bg-[radial-gradient(ellipse_at_top,_rgba(123,75,179,0.15)_0%,_transparent_70%)] relative">
+        <section style={{
+          padding: "100px 24px",
+          textAlign: "center",
+          background: "radial-gradient(ellipse at top, rgba(123,75,179,0.12) 0%, transparent 70%)",
+        }}>
           <MagicReveal>
-            <h2
-              className="text-shimmer text-5xl md:text-6xl lg:text-7xl font-bold mb-8"
-              style={{ fontFamily: "var(--font-cinzel)" }}
-            >
+            <h2 className="text-shimmer" style={{ fontFamily: "var(--font-cinzel)", fontSize: "clamp(2.5rem, 7vw, 4rem)", fontWeight: 700, marginBottom: 16 }}>
               Claim Your Wand
             </h2>
-            <p
-              className="text-[var(--foreground)]/70 text-xl md:text-2xl mb-12 max-w-2xl mx-auto font-light leading-relaxed"
-              style={{ fontFamily: "var(--font-crimson)" }}
-            >
-              First batch. Limited run. Each one unique.
+            <p style={{ fontFamily: "var(--font-crimson)", color: "rgba(232,224,240,0.55)", fontSize: "1.1rem", marginBottom: 32 }}>
+              First batch. Limited run.
             </p>
-            <p
-              className="text-5xl md:text-6xl font-bold text-[var(--gold-light)] mb-10 drop-shadow-[0_0_15px_rgba(201,168,76,0.3)]"
-              style={{ fontFamily: "var(--font-cinzel)" }}
-            >
+            <p style={{ fontFamily: "var(--font-cinzel)", fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 700, color: "var(--gold-light)", marginBottom: 32 }}>
               $39
             </p>
             <motion.button
-              className="relative px-16 py-6 text-lg md:text-xl uppercase tracking-[0.25em] rounded-full overflow-hidden cursor-pointer shadow-[0_0_40px_rgba(201,168,76,0.2)] hover:shadow-[0_0_60px_rgba(201,168,76,0.3)] transition-shadow duration-300 group"
-              style={{ fontFamily: "var(--font-cinzel)" }}
+              style={{
+                padding: "18px 56px",
+                fontSize: "1rem",
+                textTransform: "uppercase",
+                letterSpacing: "0.2em",
+                borderRadius: 9999,
+                cursor: "pointer",
+                border: "none",
+                fontFamily: "var(--font-cinzel)",
+                fontWeight: 700,
+                background: "linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold))",
+                color: "#0a0515",
+                boxShadow: "0 0 40px rgba(201,168,76,0.2)",
+              }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-[var(--gold)] via-[var(--gold-light)] to-[var(--gold)] opacity-90" />
-              <div className="absolute inset-0 bg-gradient-to-r from-[var(--gold)] via-[#fff] to-[var(--gold)] opacity-0 group-hover:opacity-40 transition-opacity duration-500" />
-              <span className="relative z-10 text-[#0a0515] font-bold">
-                Pre-Order Now
-              </span>
+              Pre-Order Now
             </motion.button>
-            <p
-              className="text-[var(--foreground)]/50 text-sm md:text-base mt-8 tracking-wide uppercase"
-              style={{ fontFamily: "var(--font-cinzel)" }}
-            >
-              <span className="text-[var(--gold)] font-bold">Free shipping</span> — Ships in 2-3 weeks
+            <p style={{ fontFamily: "var(--font-cinzel)", color: "rgba(232,224,240,0.35)", fontSize: "0.7rem", marginTop: 24, textTransform: "uppercase", letterSpacing: "0.15em" }}>
+              <span style={{ color: "var(--gold)", fontWeight: 700 }}>Free shipping</span> — Ships in 2-3 weeks
             </p>
           </MagicReveal>
         </section>
 
         {/* ===== FOOTER ===== */}
-        <footer className="py-12 px-6 text-center border-t border-[var(--gold)]/[0.06]">
-          <p
-            className="text-[var(--foreground)]/15 text-[10px] tracking-[0.2em] uppercase"
-            style={{ fontFamily: "var(--font-cinzel)" }}
-          >
+        <footer style={{ padding: "48px 24px", textAlign: "center", borderTop: "1px solid rgba(201,168,76,0.06)" }}>
+          <p style={{ fontFamily: "var(--font-cinzel)", color: "rgba(232,224,240,0.15)", fontSize: "0.6rem", textTransform: "uppercase", letterSpacing: "0.2em" }}>
             Designed & crafted by a home wizard
           </p>
         </footer>
