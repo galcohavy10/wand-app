@@ -27,17 +27,12 @@ export default function SpellCaster() {
         const castTimer = setTimeout(() => {
             setIsCasting(true);
 
-            const stopTimer = setTimeout(() => {
-                setIsCasting(false);
-
-                const nextTimer = setTimeout(() => {
-                    setActiveSpell((prev) => (prev + 1) % SPELLS.length);
-                }, PAUSE_DURATION);
-
-                return () => clearTimeout(nextTimer);
+            // After cast, go straight to next spell (object stays ON during exit)
+            const nextTimer = setTimeout(() => {
+                setActiveSpell((prev) => (prev + 1) % SPELLS.length);
             }, CAST_DURATION);
 
-            return () => clearTimeout(stopTimer);
+            return () => clearTimeout(nextTimer);
         }, SHOW_OFF_DURATION);
 
         return () => clearTimeout(castTimer);
