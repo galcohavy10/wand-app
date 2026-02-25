@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import WandIllustration from "./WandIllustration";
 import SpellTargets from "./SpellTargets";
@@ -11,38 +11,44 @@ const SPELLS = [
     { word: "Aguavate!", color: "#66bbff" },
 ];
 
-const SPELL_DURATION = 3500; // ms per spell
-const PAUSE_BETWEEN = 800; // ms pause between spells (wand off)
+const SHOW_OFF_DURATION = 1000;   // show object in OFF state first
+const CAST_DURATION = 3000;       // wand fires, object ON
+const PAUSE_DURATION = 600;       // pause before next scene
 
 export default function SpellCaster() {
     const [activeSpell, setActiveSpell] = useState(0);
     const [isCasting, setIsCasting] = useState(false);
 
-    useEffect(() => {
-        // Cycle: pause → cast → pause → next spell
-        const cycle = () => {
-            // Start casting
+    const runCycle = useCallback(() => {
+        // Phase 1: Object visible but OFF, wand dim
+        setIsCasting(false);
+
+        // Phase 2: After a beat, fire the wand and activate the object
+        const castTimer = setTimeout(() => {
             setIsCasting(true);
 
-            // After spell duration, stop casting
-            const castTimer = setTimeout(() => {
+            // Phase 3: After cast duration, stop and move to next
+            const stopTimer = setTimeout(() => {
                 setIsCasting(false);
 
-                // After pause, move to next spell
-                const pauseTimer = setTimeout(() => {
+                // Phase 4: Brief pause, then next spell
+                const nextTimer = setTimeout(() => {
                     setActiveSpell((prev) => (prev + 1) % SPELLS.length);
-                }, PAUSE_BETWEEN);
+                }, PAUSE_DURATION);
 
-                return () => clearTimeout(pauseTimer);
-            }, SPELL_DURATION);
+                return () => clearTimeout(nextTimer);
+            }, CAST_DURATION);
 
-            return () => clearTimeout(castTimer);
-        };
+            return () => clearTimeout(stopTimer);
+        }, SHOW_OFF_DURATION);
 
-        // Initial delay before first cast
-        const startTimer = setTimeout(cycle, 300);
-        return () => clearTimeout(startTimer);
-    }, [activeSpell]);
+        return () => clearTimeout(castTimer);
+    }, []);
+
+    useEffect(() => {
+        const cleanup = runCycle();
+        return cleanup;
+    }, [activeSpell, runCycle]);
 
     const spell = SPELLS[activeSpell];
 
@@ -56,11 +62,11 @@ export default function SpellCaster() {
             width: "100%",
             maxWidth: 700,
         }}>
-            {/* Boy with wand — spell text near the boy */}
+            {/* Boy with wand */}
             <div style={{ flex: "0 0 auto", width: "clamp(280px, 50vw, 420px)", position: "relative" }}>
                 <WandIllustration isCasting={isCasting} />
 
-                {/* Spell text — positioned near the boy's head */}
+                {/* Spell text — near the boy's head */}
                 <div style={{
                     position: "absolute",
                     top: "15%",
@@ -94,7 +100,7 @@ export default function SpellCaster() {
                 </div>
             </div>
 
-            {/* Spell target area — to the right of the beam */}
+            {/* Spell target — to the right */}
             <div style={{
                 flex: "0 0 auto",
                 display: "flex",
