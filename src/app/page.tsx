@@ -207,7 +207,7 @@ export default function Home() {
         <section style={{ padding: "100px 24px" }}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 24, maxWidth: 900, margin: "0 auto" }}>
             {[
-              { icon: "✦", title: "3D Printed", desc: "Designed in CAD. Homemade" },
+              { icon: "✦", title: "Customize Words", desc: "Easy setup, custom spells." },
               { icon: "💥", title: "Cast Spells", desc: "Say spells out loud." },
               { icon: "⚡", title: "Fully Integrated", desc: "Connects to lights, tv, and more." },
             ].map((feat, i) => (
