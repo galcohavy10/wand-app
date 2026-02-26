@@ -5,16 +5,22 @@ import dynamic from "next/dynamic";
 import MagicReveal from "@/components/MagicReveal";
 import SpellCaster from "@/components/SpellCaster";
 
-const CHECKOUT_URL = "https://buy.stripe.com/bJeaEWfQx45j34B21zbjW03";
+const CHECKOUT_URL = "https://buy.stripe.com/00wdR87kHas7baFdVw24000";
 
 const CSSParticles = dynamic(() => import("@/components/CSSParticles"), {
   ssr: false,
 });
 
+const WandCursor = dynamic(() => import("@/components/WandCursor"), {
+  ssr: false,
+});
+
 export default function Home() {
+
   return (
     <>
       <CSSParticles />
+      <WandCursor />
 
       <main style={{ position: "relative", zIndex: 10 }}>
         {/* ===== HERO ===== */}
@@ -127,7 +133,6 @@ export default function Home() {
 
                 <motion.a
                   href={CHECKOUT_URL}
-                  rel="noopener noreferrer"
                   style={{
                     display: "block",
                     width: "100%",
@@ -244,7 +249,7 @@ export default function Home() {
                 I&apos;m a software engineer who got tired of only building digital things. I wanted to create something physical.
               </p>
               <p>
-                So I decided to become a wizard. I forged something that felt real. a wand, connected to a microphone, that could cast spells at home.
+                So I decided to become a wizard. I forged something that felt real. A wand, connected to a microphone, that could cast spells at home.
               </p>
             </div>
           </MagicReveal>
