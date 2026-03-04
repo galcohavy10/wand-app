@@ -1,10 +1,14 @@
 "use client";
 
 import { useMemo } from "react";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export default function CSSParticles() {
+  const isMobile = useIsMobile();
+  const count = isMobile ? 10 : 30;
+
   const particles = useMemo(() => {
-    return Array.from({ length: 30 }, (_, i) => ({
+    return Array.from({ length: count }, (_, i) => ({
       id: i,
       left: `${Math.random() * 100}%`,
       delay: `${Math.random() * 15}s`,
@@ -15,7 +19,7 @@ export default function CSSParticles() {
       ],
       opacity: 0.2 + Math.random() * 0.5,
     }));
-  }, []);
+  }, [count]);
 
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
@@ -33,6 +37,7 @@ export default function CSSParticles() {
             animationDelay: p.delay,
             animationDuration: p.duration,
             boxShadow: `0 0 4px ${p.color}`,
+            willChange: "transform",
           }}
         />
       ))}

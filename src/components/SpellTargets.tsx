@@ -31,7 +31,7 @@ function LightBulb({ active }: { active: boolean }) {
             <rect x="52" y="97" width="16" height="5" rx="3" fill="#666" />
             {active && (
                 <g>
-                    {[0, 45, 90, 135, 180, 225, 270, 315].map((a) => (
+                    {[0, 90, 180, 270].map((a) => (
                         <motion.line key={a}
                             x1={60 + Math.cos((a * Math.PI) / 180) * 40} y1={55 + Math.sin((a * Math.PI) / 180) * 40}
                             x2={60 + Math.cos((a * Math.PI) / 180) * 50} y2={55 + Math.sin((a * Math.PI) / 180) * 50}
@@ -108,15 +108,15 @@ function WateredPlant({ active }: { active: boolean }) {
                         transition={{ duration: 0.4, delay: 0.1 }} />
 
                     {/* Drops falling straight down */}
-                    {[0, 1, 2, 3].map((i) => (
+                    {[0, 1].map((i) => (
                         <motion.ellipse key={`d-${i}`} cx={48} cy={27} rx={1.5} ry={2.5}
                             fill="rgba(100,190,255,0.7)"
                             animate={{ cy: [27, 110], opacity: [0.8, 0] }}
-                            transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.22, ease: "easeIn" }} />
+                            transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.35, ease: "easeIn" }} />
                     ))}
 
                     {/* Splash on leaves */}
-                    {[0, 1, 2].map((i) => (
+                    {[0, 1].map((i) => (
                         <motion.circle key={`s-${i}`} cx={48 + (i - 1) * 5} cy={75} r={1.5}
                             fill="rgba(100,190,255,0.4)"
                             animate={{ cy: [75, 68 - i * 3], cx: [48 + (i - 1) * 5, 42 + i * 7], opacity: [0.6, 0] }}
@@ -172,19 +172,19 @@ function BoomBox({ active }: { active: boolean }) {
                     {/* Speaker vibration - left */}
                     <motion.circle cx="40" cy="55" r="20" fill="none" stroke="rgba(255,102,68,0.2)" strokeWidth="1"
                         animate={{ r: [20, 24, 20], opacity: [0.3, 0, 0.3] }}
-                        transition={{ duration: 0.3, repeat: Infinity }} />
+                        transition={{ duration: 0.6, repeat: Infinity }} />
                     {/* Speaker vibration - right */}
                     <motion.circle cx="100" cy="55" r="20" fill="none" stroke="rgba(255,102,68,0.2)" strokeWidth="1"
                         animate={{ r: [20, 24, 20], opacity: [0.3, 0, 0.3] }}
-                        transition={{ duration: 0.3, repeat: Infinity, delay: 0.15 }} />
+                        transition={{ duration: 0.6, repeat: Infinity, delay: 0.3 }} />
                     {/* Music notes floating up */}
-                    {["♪", "♫", "♪", "♫"].map((note, i) => (
+                    {["♪", "♫"].map((note, i) => (
                         <motion.text key={i}
-                            x={25 + i * 28} y={20}
+                            x={35 + i * 40} y={20}
                             fill={i % 2 === 0 ? "#ff6644" : "#ff8866"}
                             fontSize="14" fontWeight="bold"
-                            animate={{ y: [20, -15], x: [25 + i * 28, 20 + i * 30 + (i % 2 === 0 ? -8 : 8)], opacity: [0.8, 0], rotate: [0, i % 2 === 0 ? -20 : 20] }}
-                            transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.35 }}>
+                            animate={{ y: [20, -15], x: [35 + i * 40, 30 + i * 42 + (i % 2 === 0 ? -8 : 8)], opacity: [0.8, 0], rotate: [0, i % 2 === 0 ? -20 : 20] }}
+                            transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.5 }}>
                             {note}
                         </motion.text>
                     ))}
@@ -234,12 +234,12 @@ function CeilingFan({ active }: { active: boolean }) {
             {active && (
                 <g>
                     {/* Wind lines */}
-                    {[0, 1, 2, 3, 4].map((i) => (
+                    {[0, 1, 2].map((i) => (
                         <motion.path key={i}
-                            d={`M${30 + i * 16} 85 Q${35 + i * 16} 80 ${40 + i * 16} 85 Q${45 + i * 16} 90 ${50 + i * 16} 85`}
+                            d={`M${30 + i * 24} 85 Q${35 + i * 24} 80 ${40 + i * 24} 85 Q${45 + i * 24} 90 ${50 + i * 24} 85`}
                             stroke="rgba(136,221,170,0.3)" strokeWidth="1.5" fill="none" strokeLinecap="round"
                             animate={{ y: [0, 25, 50], opacity: [0, 0.5, 0] }}
-                            transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.25 }} />
+                            transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.35 }} />
                     ))}
                     {/* Subtle glow */}
                     <motion.circle cx="60" cy="42" r="30" fill="rgba(136,221,170,0.04)"

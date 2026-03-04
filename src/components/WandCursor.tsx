@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface Spark {
     id: number;
@@ -15,6 +16,7 @@ interface Spark {
 let sparkId = 0;
 
 export default function WandCursor() {
+    const isMobile = useIsMobile();
     const [pos, setPos] = useState({ x: -100, y: -100 });
     const [isHovering, setIsHovering] = useState(false);
     const [isClicking, setIsClicking] = useState(false);
@@ -41,6 +43,8 @@ export default function WandCursor() {
     }, []);
 
     useEffect(() => {
+        if (isMobile) return;
+
         const handleMove = (e: MouseEvent) => {
             setPos({ x: e.clientX, y: e.clientY });
 
@@ -51,7 +55,6 @@ export default function WandCursor() {
 
         const handleDown = (e: MouseEvent) => {
             setIsClicking(true);
-            // Tip position offset (wand tip is to the left of cursor)
             spawnSparks(e.clientX - 16, e.clientY - 4);
         };
 
@@ -66,10 +69,11 @@ export default function WandCursor() {
             window.removeEventListener("mousedown", handleDown);
             window.removeEventListener("mouseup", handleUp);
         };
-    }, [spawnSparks]);
+    }, [spawnSparks, isMobile]);
 
-    // Animate sparks
+    // Animate sparks — only on desktop
     useEffect(() => {
+        if (isMobile) return;
         const animate = () => {
             setSparks((prev) =>
                 prev
@@ -86,10 +90,13 @@ export default function WandCursor() {
         };
         animRef.current = requestAnimationFrame(animate);
         return () => cancelAnimationFrame(animRef.current);
-    }, []);
+    }, [isMobile]);
 
     // Wand rotation: default tilted, hover tilts down more
     const rotation = isHovering ? -15 : -35;
+
+    // Don't render on mobile — no cursor needed
+    if (isMobile) return null;
 
     return (
         <div

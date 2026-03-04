@@ -5,14 +5,16 @@ import "./globals.css";
 const cinzel = Cinzel({
   variable: "--font-cinzel",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
+  weight: ["500", "600", "700"],
+  display: "swap",
 });
 
 const crimsonText = Crimson_Text({
   variable: "--font-crimson",
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
-  style: ["normal", "italic"],
+  weight: ["400", "700"],
+  style: ["normal"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {

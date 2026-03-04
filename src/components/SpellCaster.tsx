@@ -79,14 +79,13 @@ export default function SpellCaster() {
                         {isCasting && (
                             <motion.div
                                 key={spell.word}
-                                initial={{ opacity: 0, scale: 0.3, y: 15, filter: "blur(8px)" }}
+                                initial={{ opacity: 0, scale: 0.3, y: 15 }}
                                 animate={{
                                     opacity: 1,
                                     scale: [0.3, 1.15, 1],
                                     y: [15, -3, 0],
-                                    filter: "blur(0px)",
                                 }}
-                                exit={{ opacity: 0, scale: 0.6, y: -10, filter: "blur(4px)" }}
+                                exit={{ opacity: 0, scale: 0.6, y: -10 }}
                                 transition={{
                                     duration: 0.5,
                                     scale: { duration: 0.6, times: [0, 0.6, 1] },
